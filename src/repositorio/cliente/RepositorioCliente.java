@@ -14,6 +14,7 @@ public class RepositorioCliente implements ClienteConsulta, ClienteManipulacao, 
     public void alterarEmail(Cliente cliente, String novoEmail) {
         if (cliente != null) {
             cliente.setEmail(novoEmail);
+            clientes.put(cliente.getId(), cliente);
         }
     }
 
