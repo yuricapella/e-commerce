@@ -1,20 +1,24 @@
 package dominio.Cliente;
 
-public class Cliente {
-    private String nome;
-    private String documento;
-    private String email;
-    private long id;
-    private boolean ativo = true;
+public abstract class Cliente {
+    protected String nome;
+    protected String documento;
+    protected String email;
+    protected long id;
+    protected boolean ativo = true;
+    protected TipoCliente tipo;
 
-    private static long contador = 1;
+    protected static long contador = 1;
 
-    public Cliente(String nome, String documento, String email) {
+    public Cliente(String nome, String documento, String email, TipoCliente tipo) {
         this.nome = nome;
         this.documento = documento;
         this.email = email;
+        this.tipo = tipo;
         this.id = contador++;
     }
+
+    public abstract boolean validarDocumento();
 
     public String getNome() {
         return nome;
