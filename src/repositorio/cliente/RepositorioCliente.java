@@ -1,14 +1,13 @@
 package repositorio.cliente;
 
 import dominio.Cliente.Cliente;
-import repositorio.cliente.interfaces.compostas.ClienteAtivo;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class RepositorioClienteAtivo implements ClienteAtivo {
+public class RepositorioCliente implements ClienteConsulta, ClienteManipulacao, ClienteAlteracao {
     private final Map<Long, Cliente> clientes = new HashMap<>();
 
     @Override
@@ -46,4 +45,24 @@ public class RepositorioClienteAtivo implements ClienteAtivo {
         }
         return null;
     }
+
+    public Cliente buscarPorEmail(String email) {
+        for (Cliente cliente : clientes.values()) {
+            if (cliente.getEmail().equals(email)) {
+                return cliente;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public Cliente buscarPorNome(String nome) {
+        for (Cliente cliente : clientes.values()) {
+            if (cliente.getNome().equals(nome)) {
+                return cliente;
+            }
+        }
+        return null;
+    }
+
 }

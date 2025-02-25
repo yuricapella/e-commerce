@@ -1,17 +1,17 @@
 package dominio.Cliente;
 
-import repositorio.cliente.interfaces.compostas.ClienteAtivo;
+import repositorio.cliente.RepositorioCliente;
 
 public class ServicoCliente {
-    private final ClienteAtivo clienteAtivo;
+    private final RepositorioCliente repositorioCliente;
 
-    public ServicoCliente(ClienteAtivo clienteAtivo) {
-        this.clienteAtivo = clienteAtivo;
+    public ServicoCliente(RepositorioCliente repositorioCliente) {
+        this.repositorioCliente = repositorioCliente;
     }
 
     public void adicionarCliente(Cliente cliente) {
         if (cliente.validarDocumento()) {
-            clienteAtivo.adicionar(cliente);
+            repositorioCliente.adicionar(cliente);
         } else {
             throw new IllegalArgumentException("Documento inválido.");
         }
