@@ -15,11 +15,6 @@ public abstract class Produto {
     protected static long contador = 1;
 
     public Produto(String nome, BigDecimal valorProduto, TipoProduto tipo) {
-        if(nome == null || nome.trim().isEmpty())
-            throw new IllegalArgumentException("Nome do produto não pode ser nulo ou vazio.");
-        if(valorProduto == null || valorProduto.compareTo(BigDecimal.ZERO) <= 0)
-            throw new IllegalArgumentException("Valor do produto deve ser maior que zero.");
-
         this.id = contador++;
         this.nome = nome;
         this.valorProduto = valorProduto;
@@ -28,6 +23,8 @@ public abstract class Produto {
         this.ativo = true;
         this.tipo = tipo;
     }
+
+    public abstract boolean validarProdutoAtivo();
 
     public String getNome() {
         return nome;
