@@ -15,12 +15,8 @@ public class ValidadorProduto {
         return nome.matches("^(?=.*[A-Za-z])[A-Za-z0-9 ]+$");
     }
 
-    private static boolean validarValor(BigDecimal valor) {
-        if (valor == null) {
-            return false;
-        }
-
-        return valor.compareTo(BigDecimal.ZERO) > 0;
+    private static boolean validarValor(double valor) {
+        return valor > 0;
     }
 
 

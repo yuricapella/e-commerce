@@ -4,9 +4,9 @@ import java.math.BigDecimal;
 
 public abstract class Produto {
     protected String nome;
-    protected BigDecimal valorProduto;
-    protected BigDecimal valorVenda;
-    protected BigDecimal valorDesconto;
+    protected double valorProduto;
+    protected double valorVenda;
+    protected double valorDesconto;
 
     protected boolean ativo;
     protected TipoProduto tipo;
@@ -14,12 +14,12 @@ public abstract class Produto {
     protected long id;
     protected static long contador = 1;
 
-    public Produto(String nome, BigDecimal valorProduto, TipoProduto tipo) {
+    public Produto(String nome, double valorProduto, TipoProduto tipo) {
         this.id = contador++;
         this.nome = nome;
         this.valorProduto = valorProduto;
-        this.valorVenda = valorProduto;
-        this.valorDesconto = BigDecimal.ZERO;
+        this.valorVenda = 0;
+        this.valorDesconto = 0;
         this.ativo = true;
         this.tipo = tipo;
     }
@@ -30,15 +30,15 @@ public abstract class Produto {
         return nome;
     }
 
-    public BigDecimal getValorProduto() {
+    public double getValorProduto() {
         return valorProduto;
     }
 
-    public BigDecimal getValorVenda() {
+    public double getValorVenda() {
         return valorVenda;
     }
 
-    public BigDecimal getValorDesconto() {
+    public double getValorDesconto() {
         return valorDesconto;
     }
 
@@ -50,11 +50,11 @@ public abstract class Produto {
         return id;
     }
 
-    public void setValorVenda(BigDecimal valorVenda) {
+    public void setValorVenda(double valorVenda) {
         this.valorVenda = valorVenda;
     }
 
-    public void setValorDesconto(BigDecimal valorDesconto) {
+    public void setValorDesconto(double valorDesconto) {
         this.valorDesconto = valorDesconto;
     }
 
@@ -69,7 +69,7 @@ public abstract class Produto {
     @Override
     public String toString() {
         return String.format(
-                "%s [ID: %d, Nome: %s, Valor Base: R$ %.2f, Valor Venda: R$ %.2f, Desconto: R$ %.2f, Ativo: %b]",
+                "%s ID: %d, Nome: %s, Valor Base: R$ %.2f, Desconto: R$ %.2f, Valor Venda: R$ %.2f, Ativo: %b\n",
                 tipo, id, nome, valorProduto, valorDesconto, valorVenda, ativo
         );
     }
