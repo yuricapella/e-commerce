@@ -61,6 +61,14 @@ public abstract class Produto {
         this.valorDesconto = valorDesconto;
     }
 
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
+
     @Override
     public String toString() {
         return String.format(
