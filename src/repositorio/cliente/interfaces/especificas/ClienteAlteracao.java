@@ -1,4 +1,4 @@
-package repositorio.cliente;
+package repositorio.cliente.interfaces.especificas;
 
 import dominio.Cliente.Cliente;
 
