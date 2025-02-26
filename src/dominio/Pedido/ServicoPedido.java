@@ -1,13 +1,22 @@
 package dominio.Pedido;
 
+import dominio.Notificacao.Notificador;
+
 public class ServicoPedido {
-    // Notificar cliente sobre o pagamento pendente
-    public static void concluirPedido(Pedido pedido) {
+    private final Notificador notificador;
+    private final Pedido pedido;
+
+    public ServicoPedido(Notificador notificador, Pedido pedido) {
+        this.notificador = notificador;
+        this.pedido = pedido;
+    }
+
+    public void concluirPedido() {
         if (!pedido.getItens().isEmpty() && pedido.getValorTotal() > 0
                 && pedido.getStatus() == PedidoStatus.ABERTO) {
 
             pedido.setStatus(PedidoStatus.AGUARDANDO_PAGAMENTO);
-            System.out.println("Pedido concluído. Aguardando pagamento.");
+            notificador.notificar(pedido.getCliente(), pedido.getStatus());
         } else {
             throw new IllegalStateException("Pedido deve ter ao menos um item, valor > 0 e estar aberto.");
         }
