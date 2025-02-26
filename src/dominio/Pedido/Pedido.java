@@ -1,6 +1,7 @@
 package dominio.Pedido;
 
 import dominio.Cliente.Cliente;
+import dominio.Pagamento.PagamentoStatus;
 import dominio.Produto.Produto;
 
 import java.util.ArrayList;
@@ -14,8 +15,8 @@ public class Pedido {
     private Cliente cliente;
     private List<ItemPedido> itens;
     private Date dataCriacao;
-    private String status;
-    private String statusPagamento;
+    private PedidoStatus status;
+    private PagamentoStatus statusPagamento;
     private double valorTotal;
 
     public Pedido(Cliente cliente) {
@@ -23,13 +24,13 @@ public class Pedido {
         this.cliente = cliente;
         this.itens = new ArrayList<>();
         this.dataCriacao = new Date();
-        this.status = "ABERTO";
-        this.statusPagamento = "PENDENTE";
+        this.status = PedidoStatus.ABERTO;
+        this.statusPagamento = PagamentoStatus.PENDENTE;
         this.valorTotal = 0.0;
     }
 
     public void adicionarItem(Produto produto, int quantidade, double valorVenda) {
-        if ("ABERTO".equals(this.status)) {
+        if (this.status == PedidoStatus.ABERTO) {
             ItemPedido item = new ItemPedido(produto, quantidade, valorVenda);
             this.itens.add(item);
             calcularValorTotal();
@@ -37,14 +38,14 @@ public class Pedido {
     }
 
     public void removerItem(Produto produto) {
-        if ("ABERTO".equals(this.status)) {
+        if (this.status == PedidoStatus.ABERTO) {
             this.itens.removeIf(item -> item.getProduto().equals(produto));
             calcularValorTotal();
         }
     }
 
     public void alterarQuantidadeItem(Produto produto, int novaQuantidade) {
-        if ("ABERTO".equals(this.status)) {
+        if (this.status == PedidoStatus.ABERTO) {
             for (ItemPedido item : itens) {
                 if (item.getProduto().equals(produto)) {
                     item.setQuantidade(novaQuantidade);
@@ -56,19 +57,18 @@ public class Pedido {
     }
 
     public void finalizarPedido() {
-        if (itens.size() > 0 && valorTotal > 0) {
-            this.statusPagamento = "AGUARDANDO PAGAMENTO";
-            // Notificar cliente por email
+        if (!itens.isEmpty() && valorTotal > 0 && this.statusPagamento == PagamentoStatus.PENDENTE) {
+            this.statusPagamento = PagamentoStatus.AGUARDANDO_PAGAMENTO;
             System.out.println("Pedido Finalizado. Aguardando pagamento.");
         } else {
-            throw new IllegalStateException("Pedido deve ter pelo menos um item e valor maior que zero.");
+            throw new IllegalStateException("Pedido deve ter pelo menos um item, valor maior que zero e estar pendente.");
         }
     }
 
     public void pagar() {
-        if ("AGUARDANDO PAGAMENTO".equals(this.statusPagamento)) {
-            this.statusPagamento = "PAGO";
-            this.status = "FINALIZADO";
+        if (this.statusPagamento == PagamentoStatus.AGUARDANDO_PAGAMENTO) {
+            this.statusPagamento = PagamentoStatus.PAGO;
+            this.status = PedidoStatus.FINALIZADO;
             System.out.println("Pagamento confirmado. Pedido finalizado.");
         } else {
             throw new IllegalStateException("Não é possível pagar um pedido que não está aguardando pagamento.");
@@ -94,10 +94,10 @@ public class Pedido {
     public Date getDataCriacao() {
         return dataCriacao;
     }
-    public String getStatus() {
+    public PedidoStatus getStatus() {
         return status;
     }
-    public String getStatusPagamento() {
+    public PagamentoStatus getStatusPagamento() {
         return statusPagamento;
     }
     public double getValorTotal() {
