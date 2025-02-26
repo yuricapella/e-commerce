@@ -1,5 +1,5 @@
 package dominio.Pedido;
 
 public enum PedidoStatus {
-    ABERTO,FINALIZADO
+    ABERTO,AGUARDANDO_PAGAMENTO,PAGO,FINALIZADO
 }

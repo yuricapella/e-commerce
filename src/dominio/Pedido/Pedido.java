@@ -1,12 +1,12 @@
 package dominio.Pedido;
 
 import dominio.Cliente.Cliente;
-import dominio.Pagamento.PagamentoStatus;
 import dominio.Produto.Produto;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Date;
 
 public class Pedido {
     private static long contador = 1;
@@ -14,18 +14,16 @@ public class Pedido {
     private long id;
     private Cliente cliente;
     private List<ItemPedido> itens;
-    private Date dataCriacao;
+    private LocalDateTime dataCriacao;
     private PedidoStatus status;
-    private PagamentoStatus statusPagamento;
     private double valorTotal;
 
     public Pedido(Cliente cliente) {
         this.id = contador++;
         this.cliente = cliente;
         this.itens = new ArrayList<>();
-        this.dataCriacao = new Date();
+        this.dataCriacao = LocalDateTime.now();
         this.status = PedidoStatus.ABERTO;
-        this.statusPagamento = PagamentoStatus.PENDENTE;
         this.valorTotal = 0.0;
     }
 
@@ -34,6 +32,8 @@ public class Pedido {
             ItemPedido item = new ItemPedido(produto, quantidade, valorVenda);
             this.itens.add(item);
             calcularValorTotal();
+        }else{
+            System.out.println("Pedido já foi finalizado");
         }
     }
 
@@ -41,6 +41,8 @@ public class Pedido {
         if (this.status == PedidoStatus.ABERTO) {
             this.itens.removeIf(item -> item.getProduto().equals(produto));
             calcularValorTotal();
+        }else{
+            System.out.println("Pedido já foi finalizado");
         }
     }
 
@@ -53,25 +55,8 @@ public class Pedido {
                     break;
                 }
             }
-        }
-    }
-
-    public void finalizarPedido() {
-        if (!itens.isEmpty() && valorTotal > 0 && this.statusPagamento == PagamentoStatus.PENDENTE) {
-            this.statusPagamento = PagamentoStatus.AGUARDANDO_PAGAMENTO;
-            System.out.println("Pedido Finalizado. Aguardando pagamento.");
-        } else {
-            throw new IllegalStateException("Pedido deve ter pelo menos um item, valor maior que zero e estar pendente.");
-        }
-    }
-
-    public void pagar() {
-        if (this.statusPagamento == PagamentoStatus.AGUARDANDO_PAGAMENTO) {
-            this.statusPagamento = PagamentoStatus.PAGO;
-            this.status = PedidoStatus.FINALIZADO;
-            System.out.println("Pagamento confirmado. Pedido finalizado.");
-        } else {
-            throw new IllegalStateException("Não é possível pagar um pedido que não está aguardando pagamento.");
+        }else{
+            System.out.println("Pedido já foi finalizado");
         }
     }
 
@@ -82,26 +67,44 @@ public class Pedido {
         }
     }
 
-    public long getId() {
-        return id;
+    public void setStatus(PedidoStatus novoStatus) {
+        if (this.status == PedidoStatus.ABERTO && novoStatus == PedidoStatus.AGUARDANDO_PAGAMENTO) {
+            this.status = novoStatus;
+        } else if (this.status == PedidoStatus.AGUARDANDO_PAGAMENTO && novoStatus == PedidoStatus.PAGO) {
+            this.status = novoStatus;
+        } else if (this.status == PedidoStatus.PAGO && novoStatus == PedidoStatus.FINALIZADO) {
+            this.status = novoStatus;
+        } else {
+            throw new IllegalStateException("Transição de status inválida: " + this.status + " -> " + novoStatus);
+        }
     }
-    public Cliente getCliente() {
-        return cliente;
-    }
-    public List<ItemPedido> getItens() {
-        return itens;
-    }
-    public Date getDataCriacao() {
-        return dataCriacao;
-    }
-    public PedidoStatus getStatus() {
-        return status;
-    }
-    public PagamentoStatus getStatusPagamento() {
-        return statusPagamento;
-    }
-    public double getValorTotal() {
-        return valorTotal;
+
+    public long getId() {return id;}
+    public Cliente getCliente() {return cliente;}
+    public List<ItemPedido> getItens() {return itens;}
+    public LocalDateTime getDataCriacao() {return dataCriacao;}
+    public PedidoStatus getStatus() {return status;}
+    public double getValorTotal() {return valorTotal;}
+
+    @Override
+    public String toString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        StringBuilder texto = new StringBuilder();
+
+        texto.append(String.format("Pedido %d, %s, Status: %s, Valor Total: R$ %.2f, Data Criação: %s\n",
+                id, cliente.getNome(), status, valorTotal, dataCriacao.format(formatter)));
+
+        if (!itens.isEmpty()) {
+            texto.append("Itens do Pedido:\n");
+            for (ItemPedido item : itens) {
+                texto.append(String.format("- %s, Quantidade: %d, Valor Total: R$ %.2f\n",
+                        item.getProduto().getNome(), item.getQuantidade(), item.getValorTotal()));
+            }
+        } else {
+            texto.append("Não há itens no pedido.\n");
+        }
+
+        return texto.toString();
     }
 }
 
