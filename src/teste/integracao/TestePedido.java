@@ -4,6 +4,8 @@ import dominio.Cliente.Cliente;
 import dominio.Cliente.ClientePessoaFisica;
 import dominio.Cliente.ClientePessoaJuridica;
 import dominio.Cliente.ServicoCliente;
+import dominio.Notificacao.Notificador;
+import dominio.Notificacao.NotificadorEmail;
 import dominio.Pagamento.ServicoPagamento;
 import dominio.Pedido.Pedido;
 import dominio.Pedido.ServicoPedido;
@@ -44,6 +46,10 @@ public class TestePedido {
         Pedido pedido = new Pedido(repositorioCliente.buscarPorId(1));
         System.out.println(pedido);
 
+        Notificador notificarEmail = new NotificadorEmail();
+        ServicoPedido servicoPedido = new ServicoPedido(notificarEmail,pedido);
+        ServicoPagamento servicoPagamento = new ServicoPagamento(notificarEmail,pedido);
+
         System.out.println("MOSTRANDO PEDIDO COM PRODUTOS ADICIONADOS");
         pedido.adicionarItem(repositorioProduto.buscarPorId(1),2,1100);
         pedido.adicionarItem(repositorioProduto.buscarPorId(2),3,35);
@@ -58,7 +64,7 @@ public class TestePedido {
         System.out.println(pedido);
 
         System.out.println("CONCLUINDO O PEDIDO");
-        ServicoPedido.concluirPedido(pedido);
+        servicoPedido.concluirPedido();
         System.out.println(pedido);
 
         System.out.println("ALTERANDO QUANTIDADE APOS CONCLUIR PEDIDO");
@@ -66,7 +72,7 @@ public class TestePedido {
         System.out.println("\n"+pedido);
 
         System.out.println("PROCESSANDO O PAGAMENTO");
-        ServicoPagamento.processarPagamento(pedido);
+        servicoPagamento.processarPagamento();
         System.out.println(pedido);
 
     }
