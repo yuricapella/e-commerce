@@ -8,6 +8,6 @@ import java.util.List;
 
 public class DescontoPedidoFactory {
     public static List<DescontoPedido> getListaDescontoPedido() {
-        return List.of(new DescontoFixo(), new DescontoPercentual());
+        return List.of(new DescontoFixo(200, 20), new DescontoPercentual(10));
     }
 }

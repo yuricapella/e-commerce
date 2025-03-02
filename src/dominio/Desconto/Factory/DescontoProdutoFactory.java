@@ -7,6 +7,6 @@ import java.util.List;
 
 public class DescontoProdutoFactory {
     public static List<DescontoProduto> getListaDescontoProduto() {
-        return List.of(new DescontoVestuario());
+        return List.of(new DescontoVestuario(3,10));
     }
 }
