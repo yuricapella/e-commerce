@@ -1,24 +1,24 @@
 package dominio.Pedido;
 
-import dominio.Notificacao.Notificador;
-
 public class ServicoPedido {
-    private final Notificador notificador;
-    private final Pedido pedido;
-
-    public ServicoPedido(Notificador notificador, Pedido pedido) {
-        this.notificador = notificador;
-        this.pedido = pedido;
-    }
-
-    public void concluirPedido() {
-        if (!pedido.getItens().isEmpty() && pedido.getValorTotal() > 0
-                && pedido.getStatus() == PedidoStatus.ABERTO) {
-
-            pedido.setStatus(PedidoStatus.AGUARDANDO_PAGAMENTO);
-            notificador.notificar(pedido.getCliente(), pedido.getStatus());
-        } else {
+    public void concluirPedido(Pedido pedido) {
+        if (pedido.getItens().isEmpty() || pedido.getValorTotal() <= 0 || pedido.getStatus() != PedidoStatus.ABERTO) {
             throw new IllegalStateException("Pedido deve ter ao menos um item, valor > 0 e estar aberto.");
         }
+        pedido.setStatus(PedidoStatus.AGUARDANDO_PAGAMENTO);
+    }
+
+    public void processarPagamento(Pedido pedido) {
+        if (pedido.getStatus() != PedidoStatus.AGUARDANDO_PAGAMENTO) {
+            throw new IllegalStateException("Pedido não está aguardando pagamento.");
+        }
+        pedido.setStatus(PedidoStatus.PAGO);
+    }
+
+    public void finalizarPedido(Pedido pedido) {
+        if (pedido.getStatus() != PedidoStatus.PAGO) {
+            throw new IllegalStateException("Pedido ainda não foi pago!");
+        }
+        pedido.setStatus(PedidoStatus.FINALIZADO);
     }
 }
