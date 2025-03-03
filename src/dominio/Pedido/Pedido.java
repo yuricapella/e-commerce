@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Pedido {
+public abstract class Pedido implements PedidoModificacao{
     private static long contador = 1;
 
     protected final long id;
@@ -27,49 +27,14 @@ public abstract class Pedido {
 
     public abstract void validarPedido();
 
-    public void adicionarItem(Produto produto, int quantidade, double valorVenda) {
-        if (this.status == PedidoStatus.ABERTO) {
-            ItemPedido item = new ItemPedido(produto, quantidade, valorVenda);
-            this.itens.add(item);
-            getValorTotal();
-        }else{
-            System.out.println("Pedido já foi finalizado");
-        }
-    }
+    public abstract void adicionarItem(Produto produto, int quantidade, double valorVenda);
 
-    public void removerItem(Produto produto) {
-        if (this.status == PedidoStatus.ABERTO) {
-            this.itens.removeIf(item -> item.getProduto().equals(produto));
-            getValorTotal();
-        }else{
-            System.out.println("Pedido já foi finalizado");
-        }
-    }
+    public abstract void removerItem(Produto produto);
 
-    public void alterarQuantidadeItem(Produto produto, int novaQuantidade) {
-        if (this.status == PedidoStatus.ABERTO) {
-            for (ItemPedido item : itens) {
-                if (item.getProduto().equals(produto)) {
-                    item.setQuantidade(novaQuantidade);
-                    getValorTotal();
-                    break;
-                }
-            }
-        }else{
-            System.out.println("Pedido já foi finalizado");
-        }
-    }
+    public abstract void alterarQuantidadeItem(Produto produto, int novaQuantidade);
 
-    public void setStatus(PedidoStatus novoStatus) {
-        if (this.status == PedidoStatus.ABERTO && novoStatus == PedidoStatus.AGUARDANDO_PAGAMENTO) {
-            this.status = novoStatus;
-        } else if (this.status == PedidoStatus.AGUARDANDO_PAGAMENTO && novoStatus == PedidoStatus.PAGO) {
-            this.status = novoStatus;
-        } else if (this.status == PedidoStatus.PAGO && novoStatus == PedidoStatus.FINALIZADO) {
-            this.status = novoStatus;
-        } else {
-            throw new IllegalStateException("Transição de status inválida: " + this.status + " -> " + novoStatus);
-        }
+    protected void setStatus(PedidoStatus novoStatus) {
+        this.status = novoStatus;
     }
 
     public long getId() {
@@ -102,8 +67,8 @@ public abstract class Pedido {
         if (!itens.isEmpty()) {
             texto.append("Itens do Pedido:\n");
             for (ItemPedido item : itens) {
-                texto.append(String.format("- %s, Quantidade: %d, Valor Total: R$ %.2f\n",
-                        item.getProduto().getNome(), item.getQuantidade(), item.getValorTotal()));
+                texto.append(String.format("- %s, Valor Unitário: %.2f, Quantidade: %d, Valor Total: R$ %.2f\n",
+                        item.getProduto().getNome(), item.getValorVenda(), item.getQuantidade(), item.getValorTotal()));
             }
         } else {
             texto.append("Não há itens no pedido.\n");
