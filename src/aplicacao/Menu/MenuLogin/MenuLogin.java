@@ -1,13 +1,16 @@
 package aplicacao.Menu.MenuLogin;
 
-import java.util.ArrayList;
+import aplicacao.Menu.MenuAdmin.MenuAdmin;
+import aplicacao.Menu.MenuCliente.MenuCliente;
+
+import java.util.List;
 import java.util.Scanner;
 
-public class Login {
+public class MenuLogin {
     private Scanner scanner;
     private List<Usuario> usuarios;
 
-    public Login(Scanner scanner, List<Usuario> usuarios) {
+    public MenuLogin(Scanner scanner, List<Usuario> usuarios) {
         this.scanner = scanner;
         this.usuarios = usuarios;
     }
@@ -30,9 +33,11 @@ public class Login {
             System.out.println("Login ou senha incorretos!");
         } else {
             if (usuarioLogado.isAdmin()) {
-                exibirMenuAdmin();
+                MenuAdmin menuAdmin = new MenuAdmin(scanner, usuarioLogado,repositorioCliente, repositorioProduto, repositorioPedidos);
+                menuAdmin.exibirMenu();
             } else {
-                exibirMenuCliente(usuarioLogado);
+                MenuCliente menuCliente = new MenuCliente(scanner, usuarioLogado);
+                menuCliente.exibirMenu();
             }
         }
     }
