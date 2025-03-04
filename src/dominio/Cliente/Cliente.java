@@ -24,6 +24,7 @@ public abstract class Cliente {
         return nome;
     }
 
+
     public String getDocumento() {
         return documento;
     }
@@ -32,8 +33,8 @@ public abstract class Cliente {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public long getId() {
+        return id;
     }
 
     public boolean isAtivo() {
@@ -44,9 +45,23 @@ public abstract class Cliente {
         this.ativo = ativo;
     }
 
-    public long getId() {
-        return id;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
+
+    public void setDocumento(String documento) {
+        this.documento = documento;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+
+
+
+
+
 
     @Override
     public String toString() {
