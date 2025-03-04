@@ -5,13 +5,13 @@ import java.math.BigDecimal;
 public class ProdutoEletronico extends Produto {
     public ProdutoEletronico(String nome, double valorProduto) {
         super(nome, valorProduto, TipoProduto.ELETRONICO);
-        if (!validarProdutoAtivo()) {
+        if (!validarProduto()) {
             throw new IllegalArgumentException("Produto eletrônico inválido.");
         }
     }
 
     @Override
-    public boolean validarProdutoAtivo() {
+    public boolean validarProduto() {
         return ValidadorProduto.validar(this);
     }
 }

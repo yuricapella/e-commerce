@@ -10,7 +10,7 @@ public class ServicoProduto {
     }
 
     public void adicionarProduto(Produto produto) {
-        if (produto.validarProdutoAtivo()) {
+        if (produto.validarProduto()) {
             produtoAtivo.adicionar(produto);
         } else {
             throw new IllegalArgumentException("Produto inválido.");
