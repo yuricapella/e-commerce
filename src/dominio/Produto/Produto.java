@@ -5,12 +5,10 @@ import java.math.BigDecimal;
 public abstract class Produto {
     protected String nome;
     protected double valorProduto;
-
-    protected boolean ativo;
-    protected TipoProduto tipo;
-
     protected long id;
     protected static long contador = 1;
+    protected boolean ativo;
+    protected TipoProduto tipo;
 
     public Produto(String nome, double valorProduto, TipoProduto tipo) {
         this.id = contador++;
