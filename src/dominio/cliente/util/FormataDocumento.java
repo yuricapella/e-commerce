@@ -1,4 +1,4 @@
-package dominio.Cliente;
+package dominio.cliente.util;
 
 public class FormataDocumento {
     public static String formatarCPF(String cpf) {

@@ -1,6 +1,6 @@
 package dominio.Pedido;
 
-import dominio.Cliente.Cliente;
+import dominio.cliente.Cliente;
 import dominio.Produto.Produto;
 
 public class PedidoPadrao extends Pedido {

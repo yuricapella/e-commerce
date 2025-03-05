@@ -1,6 +1,6 @@
 package dominio.Notificacao;
 
-import dominio.Cliente.Cliente;
+import dominio.cliente.Cliente;
 import dominio.Pedido.PedidoStatus;
 
 public class NotificadorEmail implements Notificador {

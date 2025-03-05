@@ -1,6 +1,6 @@
 package repositorio.cliente;
 
-import dominio.Cliente.Cliente;
+import dominio.cliente.Cliente;
 import repositorio.cliente.interfaces.compostas.RepositorioCliente;
 
 import java.util.ArrayList;
