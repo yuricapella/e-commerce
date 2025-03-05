@@ -1,5 +1,7 @@
 package dominio.usuario;
 
+import dominio.cliente.Cliente;
+
 public abstract class Usuario {
     private String login;
     private String senha;
@@ -7,6 +9,7 @@ public abstract class Usuario {
     private boolean ativo;
     private long id;
     private static long contador = 1;
+    private Cliente cliente;
 
     public Usuario(String login, String senha, TipoUsuario tipo) {
         this.id = contador++;
@@ -36,6 +39,10 @@ public abstract class Usuario {
         return id;
     }
 
+    public Cliente getCliente() {
+        return cliente;
+    }
+
     public void setLogin(String login) {
         this.login = login;
     }
@@ -46,5 +53,9 @@ public abstract class Usuario {
 
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 }
