@@ -1,7 +1,5 @@
 package dominio.Produto;
 
-import java.math.BigDecimal;
-
 public class ProdutoPapelaria extends Produto {
     public ProdutoPapelaria(String nome, double valorProduto) {
         super(nome, valorProduto, TipoProduto.PAPELARIA);
@@ -12,6 +10,6 @@ public class ProdutoPapelaria extends Produto {
 
     @Override
     public boolean validarProduto() {
-        return ValidadorProduto.validar(this);
+        return ValidaProduto.validarNome(this.getNome()) && ValidaProduto.validarPreco(this.getValorProduto());
     }
 }
