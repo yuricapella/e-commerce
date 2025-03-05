@@ -1,36 +1,38 @@
 package aplicacao.Menu.MenuCadastro;
 
-import java.util.List;
+import dominio.usuario.ServicoUsuario;
+import dominio.usuario.Usuario;
 import java.util.Scanner;
 
 public class CadastroUsuario {
     private Scanner scanner;
-    private List<Usuario> usuarios;
+    private ServicoUsuario servicoUsuario;
 
-    public CadastroUsuario(Scanner scanner, List<Usuario> usuarios) {
+    public CadastroUsuario(Scanner scanner, ServicoUsuario servicoUsuario) {
         this.scanner = scanner;
-        this.usuarios = usuarios;
+        this.servicoUsuario = servicoUsuario;
     }
 
     public void cadastrar() {
+        String login = obterLogin();
+        String senha = obterSenha();
+
+        try {
+            Usuario novoUsuario = servicoUsuario.cadastrarUsuario(login, senha);
+            servicoUsuario.adicionarUsuario(novoUsuario);
+            System.out.println("Usuário cadastrado com sucesso!");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Erro no cadastro: " + e.getMessage());
+        }
+    }
+
+    private String obterLogin() {
         System.out.print("Digite um login: ");
-        String login = scanner.nextLine();
+        return scanner.nextLine();
+    }
+
+    private String obterSenha() {
         System.out.print("Digite uma senha: ");
-        String senha = scanner.nextLine();
-
-        if (login.isEmpty() || senha.isEmpty()) {
-            System.out.println("Login e senha não podem ser vazios.");
-            return;
-        }
-
-        for (Usuario usuario : usuarios) {
-            if (usuario.getLogin().equals(login)) {
-                System.out.println("Usuário já cadastrado.");
-                return;
-            }
-        }
-
-        usuarios.add(new Usuario(login, senha, false));
-        System.out.println("Usuário cadastrado com sucesso!");
+        return scanner.nextLine();
     }
 }
