@@ -1,29 +1,26 @@
-package dominio.Cliente;
+package dominio.cliente;
 
 public abstract class Cliente {
-    protected String nome;
-    protected String documento;
-    protected String email;
-    protected long id;
-    protected static long contador = 1;
-    protected boolean ativo;
-    protected TipoCliente tipo;
+    private String nome;
+    private String documento;
+    private String email;
+    private TipoCliente tipo;
+    private long id;
+    private static long contador = 1;
+    private boolean ativo;
 
     public Cliente(String nome, String documento, String email, TipoCliente tipo) {
-        this.id = contador++;
         this.nome = nome;
         this.documento = documento;
         this.email = email;
-        this.ativo = true;
         this.tipo = tipo;
+        this.ativo = true;
+        this.id = contador++;
     }
-
-    public abstract boolean validarDocumento();
 
     public String getNome() {
         return nome;
     }
-
 
     public String getDocumento() {
         return documento;

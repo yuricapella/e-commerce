@@ -1,6 +1,6 @@
 package aplicacao.Menu.MenuAdmin;
 
-import dominio.Cliente.Cliente;
+import dominio.cliente.Cliente;
 import dominio.Pedido.Pedido;
 import dominio.Produto.Produto;
 import dominio.usuario.Usuario;

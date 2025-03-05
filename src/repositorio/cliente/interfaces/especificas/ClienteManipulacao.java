@@ -1,6 +1,6 @@
 package repositorio.cliente.interfaces.especificas;
 
-import dominio.Cliente.Cliente;
+import dominio.cliente.Cliente;
 
 public interface ClienteManipulacao {
     void adicionar(Cliente cliente);
