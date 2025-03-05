@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface RepositorioPedidoListagem {
     Pedido buscarPorId(long id);
-    List<Pedido> listarTodos();
+    List<Pedido> listarTodosPedidos();
     List<Pedido> listarEmAndamento();
     List<Pedido> listarFinalizados();
 }

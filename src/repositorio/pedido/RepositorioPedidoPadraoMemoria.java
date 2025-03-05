@@ -31,7 +31,7 @@ public class RepositorioPedidoPadraoMemoria implements RepositorioPedidoPadrao {
     }
 
     @Override
-    public List<Pedido> listarTodos() {
+    public List<Pedido> listarTodosPedidos() {
         return new ArrayList<>(pedidos);
     }
 
