@@ -36,13 +36,18 @@ public abstract class Produto {
         return id;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public boolean isAtivo() {
+        return ativo;
     }
 
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
     }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
 
     @Override
     public String toString() {
