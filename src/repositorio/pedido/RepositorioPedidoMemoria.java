@@ -2,6 +2,7 @@ package repositorio.pedido;
 
 import dominio.Pedido.Pedido;
 import dominio.Pedido.PedidoStatus;
+import dominio.cliente.Cliente;
 import repositorio.pedido.interfaces.compostas.RepositorioPedido;
 
 import java.util.ArrayList;
@@ -24,6 +25,16 @@ public class RepositorioPedidoMemoria implements RepositorioPedido {
     public Pedido buscarPorId(long id) {
         for (Pedido pedido : pedidos) {
             if (pedido.getId() == id) {
+                return pedido;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public Pedido buscarPorCliente(Cliente cliente) {
+        for (Pedido pedido : pedidos) {
+            if (pedido.getCliente() == cliente) {
                 return pedido;
             }
         }
