@@ -1,17 +1,15 @@
 package dominio.Produto;
 
-import java.math.BigDecimal;
-
 public class ProdutoVestuario extends Produto {
     public ProdutoVestuario(String nome, double valorProduto) {
         super(nome, valorProduto, TipoProduto.VESTUARIO);
-        if (!validarProdutoAtivo()) {
+        if (!validarProduto()) {
             throw new IllegalArgumentException("Produto vestuario inválido.");
         }
     }
 
     @Override
-    public boolean validarProdutoAtivo() {
-        return ValidadorProduto.validar(this);
+    public boolean validarProduto() {
+        return ValidaProduto.validarNome(this.getNome()) && ValidaProduto.validarPreco(this.getValorProduto());
     }
 }

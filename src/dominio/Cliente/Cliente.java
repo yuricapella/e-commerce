@@ -5,17 +5,17 @@ public abstract class Cliente {
     protected String documento;
     protected String email;
     protected long id;
-    protected boolean ativo = true;
+    protected static long contador = 1;
+    protected boolean ativo;
     protected TipoCliente tipo;
 
-    protected static long contador = 1;
-
     public Cliente(String nome, String documento, String email, TipoCliente tipo) {
+        this.id = contador++;
         this.nome = nome;
         this.documento = documento;
         this.email = email;
+        this.ativo = true;
         this.tipo = tipo;
-        this.id = contador++;
     }
 
     public abstract boolean validarDocumento();
@@ -23,6 +23,7 @@ public abstract class Cliente {
     public String getNome() {
         return nome;
     }
+
 
     public String getDocumento() {
         return documento;
@@ -32,8 +33,8 @@ public abstract class Cliente {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public long getId() {
+        return id;
     }
 
     public boolean isAtivo() {
@@ -44,8 +45,16 @@ public abstract class Cliente {
         this.ativo = ativo;
     }
 
-    public long getId() {
-        return id;
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setDocumento(String documento) {
+        this.documento = documento;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override
