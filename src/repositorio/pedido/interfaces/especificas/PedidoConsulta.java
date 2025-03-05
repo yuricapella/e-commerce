@@ -4,7 +4,7 @@ import dominio.Pedido.Pedido;
 
 import java.util.List;
 
-public interface RepositorioPedidoListagem {
+public interface PedidoConsulta {
     Pedido buscarPorId(long id);
     List<Pedido> listarTodosPedidos();
     List<Pedido> listarEmAndamento();
