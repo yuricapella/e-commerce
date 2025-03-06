@@ -5,7 +5,7 @@ import dominio.Pedido.Pedido;
 import dominio.Produto.Produto;
 import dominio.usuario.Usuario;
 import repositorio.cliente.RepositorioClienteMemoria;
-import repositorio.pedido.RepositorioPedidoPadraoMemoria;
+import repositorio.pedido.RepositorioPedidoMemoria;
 import repositorio.produto.RepositorioProdutoMemoria;
 import repositorio.usuario.RepositorioUsuarioMemoria;
 
@@ -17,13 +17,13 @@ public class MenuAdmin {
     private Usuario usuarioLogado;
     private RepositorioClienteMemoria repositorioCliente;
     private RepositorioProdutoMemoria repositorioProduto;
-    private RepositorioPedidoPadraoMemoria repositorioPedido;
+    private RepositorioPedidoMemoria repositorioPedido;
     private RepositorioUsuarioMemoria repositorioUsuario;
 
     public MenuAdmin(Scanner scanner, Usuario usuarioLogado,
                      RepositorioClienteMemoria repositorioCliente,
                      RepositorioProdutoMemoria repositorioProduto,
-                     RepositorioPedidoPadraoMemoria repositorioPedido,
+                     RepositorioPedidoMemoria repositorioPedido,
                      RepositorioUsuarioMemoria repositorioUsuario) {
         this.scanner = scanner;
         this.usuarioLogado = usuarioLogado;

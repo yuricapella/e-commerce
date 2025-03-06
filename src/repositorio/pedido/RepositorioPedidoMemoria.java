@@ -2,12 +2,13 @@ package repositorio.pedido;
 
 import dominio.Pedido.Pedido;
 import dominio.Pedido.PedidoStatus;
-import repositorio.pedido.interfaces.compostas.RepositorioPedidoPadrao;
+import dominio.cliente.Cliente;
+import repositorio.pedido.interfaces.compostas.RepositorioPedido;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RepositorioPedidoPadraoMemoria implements RepositorioPedidoPadrao {
+public class RepositorioPedidoMemoria implements RepositorioPedido {
     private List<Pedido> pedidos = new ArrayList<>();
 
     @Override
@@ -24,6 +25,16 @@ public class RepositorioPedidoPadraoMemoria implements RepositorioPedidoPadrao {
     public Pedido buscarPorId(long id) {
         for (Pedido pedido : pedidos) {
             if (pedido.getId() == id) {
+                return pedido;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public Pedido buscarPorCliente(Cliente cliente) {
+        for (Pedido pedido : pedidos) {
+            if (pedido.getCliente() == cliente) {
                 return pedido;
             }
         }
