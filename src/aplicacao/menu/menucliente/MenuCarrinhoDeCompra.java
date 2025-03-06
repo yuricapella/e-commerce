@@ -13,14 +13,14 @@ import dominio.Pedido.ItemPedido;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-public class MenuPedido {
+public class MenuCarrinhoDeCompra {
     private Scanner scanner;
     private Pedido pedido;
     private ServicoDesconto servicoDesconto;
     private ServicoFrete servicoFrete;
     private ServicoPedido servicoPedido;
 
-    public MenuPedido(Scanner scanner, Pedido pedido, ServicoDesconto servicoDesconto, ServicoPedido servicoPedido) {
+    public MenuCarrinhoDeCompra(Scanner scanner, Pedido pedido, ServicoDesconto servicoDesconto, ServicoPedido servicoPedido) {
         this.scanner = scanner;
         this.pedido = pedido;
         this.servicoDesconto = servicoDesconto;

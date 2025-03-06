@@ -15,7 +15,7 @@ public class MenuCliente {
     private Scanner scanner;
     private Usuario usuarioLogado;
     private MenuProduto menuProduto;
-    private MenuPedido menuPedido;
+    private MenuCarrinhoDeCompra menuCarrinhoDeCompra;
     private MenuPagamento menuPagamento;
     private Pedido pedido;
     private ValidadorPedido validadorPedido;
@@ -38,7 +38,7 @@ public class MenuCliente {
             repositorioPedido.adicionar(pedido);
         }
         this.menuProduto = new MenuProduto(scanner, repositorioProduto, pedido);
-        this.menuPedido = new MenuPedido(scanner, pedido, servicoDesconto, servicoPedido);
+        this.menuCarrinhoDeCompra = new MenuCarrinhoDeCompra(scanner, pedido, servicoDesconto, servicoPedido);
         this.menuPagamento = new MenuPagamento(scanner, pedido, servicoPedido, servicoDesconto);
     }
 
@@ -63,7 +63,7 @@ public class MenuCliente {
                     menuProduto.exibirMenu();
                     break;
                 case "2":
-                    menuPedido.exibirMenu();
+                    menuCarrinhoDeCompra.exibirMenu();
                     break;
                 case "3":
                     menuPagamento.exibirMenu();
