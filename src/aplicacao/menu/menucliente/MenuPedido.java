@@ -28,7 +28,22 @@ public class MenuPedido {
     public void exibirMenu() {
         boolean menuAtivo = true;
         while (menuAtivo) {
-            exibirInformacoesPedido();
+            double descontoPedido = CalculadoraDeValoresPedido.calcularDescontoPedido(pedido, servicoDesconto);
+            double descontoProduto = CalculadoraDeValoresPedido.calcularDescontoProduto(pedido, servicoDesconto);
+            double totalDesconto = descontoPedido + descontoProduto;
+            double valorTotalComDesconto = CalculadoraDeValoresPedido.calcularValorTotalComDesconto(pedido, servicoDesconto);
+
+            double valorFrete = CalculadoraDeValoresPedido.calcularValorFrete(pedido, servicoFrete);
+            double valorTotalFinal = CalculadoraDeValoresPedido.calcularValorTotalFinal(pedido, servicoDesconto, servicoFrete);
+
+            System.out.println("\n==== Carrinho de Compras ====");
+            System.out.println(pedido);
+            System.out.println("Desconto do Pedido: R$ " + descontoPedido);
+            System.out.println("Desconto de Produto: R$ " + descontoProduto);
+            System.out.println("Valor Total de Desconto: R$ " + totalDesconto);
+            System.out.println("Valor Total com Desconto: R$ " + valorTotalComDesconto);
+            System.out.println("Valor do Frete: R$ " + valorFrete);
+            System.out.println("Valor Total Final (com frete): R$ " + valorTotalFinal);
 
             String opcao = scanner.nextLine();
             switch (opcao) {
@@ -49,25 +64,6 @@ public class MenuPedido {
                     break;
             }
         }
-    }
-
-    private void exibirInformacoesPedido() {
-        double descontoPedido = CalculadoraDeValoresPedido.calcularDescontoPedido(pedido, servicoDesconto);
-        double descontoProduto = CalculadoraDeValoresPedido.calcularDescontoProduto(pedido, servicoDesconto);
-        double totalDesconto = descontoPedido + descontoProduto;
-        double valorTotalComDesconto = CalculadoraDeValoresPedido.calcularValorTotalComDesconto(pedido, servicoDesconto);
-
-        double valorFrete = CalculadoraDeValoresPedido.calcularValorFrete(pedido, servicoFrete);
-        double valorTotalFinal = CalculadoraDeValoresPedido.calcularValorTotalFinal(pedido, servicoDesconto, servicoFrete);
-
-        System.out.println("\n==== Carrinho de Compras ====");
-        System.out.println(pedido);
-        System.out.println("Desconto do Pedido: R$ " + descontoPedido);
-        System.out.println("Desconto de Produto: R$ " + descontoProduto);
-        System.out.println("Valor Total de Desconto: R$ " + totalDesconto);
-        System.out.println("Valor Total com Desconto: R$ " + valorTotalComDesconto);
-        System.out.println("Valor do Frete: R$ " + valorFrete);
-        System.out.println("Valor Total Final (com frete): R$ " + valorTotalFinal);
     }
 
     private void removerItem() {

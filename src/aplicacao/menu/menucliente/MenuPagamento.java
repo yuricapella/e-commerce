@@ -28,7 +28,11 @@ public class MenuPagamento {
     public void exibirMenu() {
         boolean menuAtivo = true;
         while (menuAtivo) {
-            exibirInformacoesPagamento();
+            double valorTotalFinal = CalculadoraDeValoresPedido.calcularValorTotalFinal(pedido, servicoDesconto, servicoFrete);
+
+            System.out.println("\n==== Pagamento ====");
+            System.out.println("Status do Pedido: " + pedido.getStatus());
+            System.out.println("Valor Total Final (com descontos e frete): R$ " + valorTotalFinal);
 
             System.out.println("Escolha uma opção:");
             System.out.println("1. Processar Pagamento");
@@ -47,14 +51,6 @@ public class MenuPagamento {
                     break;
             }
         }
-    }
-
-    private void exibirInformacoesPagamento() {
-        double valorTotalFinal = CalculadoraDeValoresPedido.calcularValorTotalFinal(pedido, servicoDesconto, servicoFrete);
-
-        System.out.println("\n==== Pagamento ====");
-        System.out.println("Status do Pedido: " + pedido.getStatus());
-        System.out.println("Valor Total Final (com descontos e frete): R$ " + valorTotalFinal);
     }
 
     private void processarPagamento() {
