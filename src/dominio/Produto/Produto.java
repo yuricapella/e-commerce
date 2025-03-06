@@ -1,14 +1,12 @@
 package dominio.Produto;
 
-import java.math.BigDecimal;
-
 public abstract class Produto {
-    protected String nome;
-    protected double valorProduto;
-    protected long id;
-    protected static long contador = 1;
-    protected boolean ativo;
-    protected TipoProduto tipo;
+    private String nome;
+    private double valorProduto;
+    private long id;
+    private static long contador = 1;
+    private boolean ativo;
+    private TipoProduto tipo;
 
     public Produto(String nome, double valorProduto, TipoProduto tipo) {
         this.id = contador++;
@@ -52,8 +50,8 @@ public abstract class Produto {
     @Override
     public String toString() {
         return String.format(
-                "%s ID: %d, Nome: %s, Valor Base: R$ %.2f, Ativo: %b\n",
-                tipo, id, nome, valorProduto, ativo
+                "%s ID: %d, Nome: %s, Valor Base: R$ %.2f, Tipo: %s, Ativo: %b\n",
+                tipo, id, nome, valorProduto, tipo ,ativo
         );
     }
 }

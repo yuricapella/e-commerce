@@ -54,6 +54,7 @@ public class Main {
         Usuario testeCliente = new UsuarioCliente("teste","teste");
         Cliente testeClientePessoaFisica = new ClientePessoaFisica("teste","12345678910","teste@teste.com");
         testeCliente.setCliente(testeClientePessoaFisica);
+        repositorioCliente.adicionar(testeClientePessoaFisica);
 
         repositorioUsuario.adicionar(testeCliente);
 

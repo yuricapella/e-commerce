@@ -58,4 +58,8 @@ public abstract class Usuario {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
+    @Override
+    public String toString() {
+        return String.format("Usuário [ID: %d, Login: %s, Tipo: %s, Ativo: %b]", getId(), getLogin(), getTipo(), isAtivo());
+    }
 }
