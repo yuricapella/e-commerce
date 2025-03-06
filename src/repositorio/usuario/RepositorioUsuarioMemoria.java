@@ -61,4 +61,13 @@ public class RepositorioUsuarioMemoria implements RepositorioUsuario {
         }
         return null;
     }
+
+    public Usuario buscarPorLoginESenha(String login, String senha) {
+        for (Usuario usuario : usuarios.values()) {
+            if (usuario.getLogin().equals(login) && usuario.getSenha().equals(senha)) {
+                return usuario;
+            }
+        }
+        return null;
+    }
 }
