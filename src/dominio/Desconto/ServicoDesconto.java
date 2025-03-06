@@ -22,7 +22,7 @@ public class ServicoDesconto {
         return descontoPedido + descontoProduto;
     }
 
-    private double calcularMelhorDescontoPedido(Pedido pedido) {
+    public double calcularMelhorDescontoPedido(Pedido pedido) {
         double totalDesconto = 0;
         for (DescontoPedido desconto : descontosPedido) {
             double valorDesconto = desconto.calcular(pedido);
@@ -31,7 +31,7 @@ public class ServicoDesconto {
         return totalDesconto;
     }
 
-    private double calcularMelhorDescontoProduto(Pedido pedido) {
+    public double calcularMelhorDescontoProduto(Pedido pedido) {
         double totalDesconto = 0;
         for (ItemPedido item : pedido.getItens()) {
             for (DescontoProduto desconto : descontosProduto) {
