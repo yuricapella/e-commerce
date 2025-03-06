@@ -27,7 +27,8 @@ public class MenuCliente {
         this.scanner = scanner;
         this.usuarioLogado = usuarioLogado;
         if (usuarioLogado.getCliente() == null) {
-            System.out.println("Erro: Usuário não possui um cliente associado.");
+            System.out.println("Erro: Usuário não possui um cliente associado. Deslogando...");
+            this.usuarioLogado = null;
             return;
         }
         Cliente cliente = usuarioLogado.getCliente();
@@ -43,6 +44,10 @@ public class MenuCliente {
     }
 
     public void exibirMenu() {
+        if (usuarioLogado == null) {
+            System.out.println("Usuário deslogado. Retornando ao menu principal.");
+            return;
+        }
         Cliente cliente = usuarioLogado.getCliente();
         boolean menuAtivo = true;
         while (menuAtivo) {

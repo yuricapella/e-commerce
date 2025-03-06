@@ -69,7 +69,7 @@ public class MenuLogin {
     }
 
     private void exibirMenuCliente(Usuario usuarioLogado) {
-        System.out.println("Bem-vindo, " + usuarioLogado.getLogin() + "! Acesso concedido como cliente.");
+        System.out.println("Bem-vindo, " + usuarioLogado.getLogin() + "!");
         MenuCliente menuCliente = new MenuCliente(scanner, usuarioLogado, repositorioPedido, repositorioProduto,
                 servicoDesconto, servicoPedido, validadorPedido);
         menuCliente.exibirMenu();

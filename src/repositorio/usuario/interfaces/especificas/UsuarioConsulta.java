@@ -1,6 +1,5 @@
 package repositorio.usuario.interfaces.especificas;
 
-import dominio.Produto.Produto;
 import dominio.usuario.Usuario;
 
 import java.util.List;

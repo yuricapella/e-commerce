@@ -50,7 +50,7 @@ public class MenuPrincipal {
         this.validadorPedido = validadorPedido;
         this.login = new MenuLogin(scanner, repositorioUsuario, repositorioCliente, repositorioProduto,
                 repositorioPedido, servicoDesconto, servicoPedido, validadorPedido);
-        this.cadastrarUsuario = new CadastroUsuario(scanner, servicoUsuario, servicoCliente);
+        this.cadastrarUsuario = new CadastroUsuario(scanner, servicoUsuario, servicoCliente, repositorioUsuario);
     }
 
     public void exibirMenu() {

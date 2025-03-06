@@ -4,42 +4,58 @@ import dominio.usuario.ServicoUsuario;
 import dominio.usuario.Usuario;
 import dominio.cliente.servico.ServicoCliente;
 import dominio.cliente.Cliente;
+import repositorio.usuario.interfaces.compostas.RepositorioUsuario;
+
 import java.util.Scanner;
 
 public class CadastroUsuario {
     private Scanner scanner;
     private ServicoUsuario servicoUsuario;
     private ServicoCliente servicoCliente;
+    private RepositorioUsuario repositorioUsuario;
 
-    public CadastroUsuario(Scanner scanner, ServicoUsuario servicoUsuario, ServicoCliente servicoCliente) {
+    public CadastroUsuario(Scanner scanner, ServicoUsuario servicoUsuario, ServicoCliente servicoCliente, RepositorioUsuario repositorioUsuario) {
         this.scanner = scanner;
         this.servicoUsuario = servicoUsuario;
         this.servicoCliente = servicoCliente;
+        this.repositorioUsuario = repositorioUsuario;
     }
 
     public void cadastrar() {
         String login = obterLogin();
         String senha = obterSenha();
 
+        Usuario usuarioExistente = repositorioUsuario.buscarPorLogin(login);
+        Usuario novoUsuario = null;
+
+        if (usuarioExistente != null) {
+            System.out.println("Usuário já existe no repositório.");
+            novoUsuario = usuarioExistente;
+        } else {
+            try {
+                novoUsuario = servicoUsuario.cadastrarUsuario(login, senha);
+                servicoUsuario.adicionarUsuario(novoUsuario);
+                System.out.println("Usuário cadastrado com sucesso!");
+            } catch (IllegalArgumentException e) {
+                System.out.println("Erro no cadastro de usuário: " + e.getMessage());
+                return;
+            }
+        }
+
+        String nomeCliente = obterNomeCliente();
+        String documentoCliente = obterDocumentoCliente();
+        String emailCliente = obterEmailCliente();
+
         try {
-            Usuario novoUsuario = servicoUsuario.cadastrarUsuario(login, senha);
-            servicoUsuario.adicionarUsuario(novoUsuario);
-            System.out.println("Usuário cadastrado com sucesso!");
-
-            String nomeCliente = obterNomeCliente();
-            String documentoCliente = obterDocumentoCliente();
-            String emailCliente = obterEmailCliente();
-
             Cliente novoCliente = servicoCliente.cadastrarCliente(nomeCliente, documentoCliente, emailCliente);
             servicoCliente.adicionarCliente(novoCliente);
-
             novoUsuario.setCliente(novoCliente);
-
             System.out.println("Cliente cadastrado e associado ao usuário com sucesso!");
         } catch (IllegalArgumentException e) {
-            System.out.println("Erro no cadastro: " + e.getMessage());
+            System.out.println("Erro no cadastro de cliente: " + e.getMessage());
         }
     }
+
 
     private String obterLogin() {
         System.out.print("Digite um login: ");
@@ -66,4 +82,3 @@ public class CadastroUsuario {
         return scanner.nextLine();
     }
 }
-
