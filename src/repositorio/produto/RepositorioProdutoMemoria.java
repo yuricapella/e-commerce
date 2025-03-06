@@ -16,6 +16,12 @@ public class RepositorioProdutoMemoria implements RepositorioProduto {
         produtos.put(produto.getId(), produto);
     }
 
+    public void adicionar(List<Produto> listaProdutos) {
+        for (Produto produto : listaProdutos) {
+            produtos.put(produto.getId(), produto);
+        }
+    }
+
     @Override
     public void remover(Produto produto) {
         produto.setAtivo(false);
