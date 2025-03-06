@@ -4,7 +4,6 @@ import aplicacao.menu.util.CalculadoraDeValoresPedido;
 import dominio.Desconto.ServicoDesconto;
 import dominio.Frete.FreteFactory;
 import dominio.Frete.ServicoFrete;
-import dominio.Notificacao.ServicoNotificador;
 import dominio.Pedido.Pedido;
 import dominio.Pedido.ServicoPedido;
 import dominio.Produto.Produto;
@@ -16,16 +15,13 @@ public class MenuPedido {
     private Pedido pedido;
     private ServicoDesconto servicoDesconto;
     private ServicoFrete servicoFrete;
-    private ServicoNotificador servicoNotificador;
     private ServicoPedido servicoPedido;
 
-    public MenuPedido(Scanner scanner, Pedido pedido, ServicoDesconto servicoDesconto,
-                      ServicoNotificador servicoNotificador, ServicoPedido servicoPedido) {
+    public MenuPedido(Scanner scanner, Pedido pedido, ServicoDesconto servicoDesconto, ServicoPedido servicoPedido) {
         this.scanner = scanner;
         this.pedido = pedido;
         this.servicoDesconto = servicoDesconto;
         this.servicoFrete = new ServicoFrete(FreteFactory.criarFretes());
-        this.servicoNotificador = servicoNotificador;
         this.servicoPedido = servicoPedido;
     }
 

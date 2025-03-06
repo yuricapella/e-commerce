@@ -1,4 +1,4 @@
-package aplicacao.Menu.MenuCadastro;
+package aplicacao.menu.menucadastro;
 
 import dominio.usuario.ServicoUsuario;
 import dominio.usuario.Usuario;

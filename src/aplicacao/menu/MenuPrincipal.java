@@ -1,10 +1,15 @@
-package aplicacao.Menu;
+package aplicacao.menu;
 
-import aplicacao.Menu.MenuCadastro.CadastroUsuario;
-import aplicacao.Menu.MenuLogin.MenuLogin;
-import dominio.usuario.Usuario;
-
-import java.util.List;
+import aplicacao.menu.menucadastro.CadastroUsuario;
+import aplicacao.menu.menulogin.MenuLogin;
+import repositorio.usuario.interfaces.compostas.RepositorioUsuario;
+import repositorio.cliente.interfaces.compostas.RepositorioCliente;
+import repositorio.produto.interfaces.compostas.RepositorioProduto;
+import repositorio.pedido.interfaces.compostas.RepositorioPedido;
+import dominio.Desconto.ServicoDesconto;
+import dominio.Pedido.ServicoPedido;
+import dominio.usuario.ServicoUsuario;
+import dominio.cliente.servico.ServicoCliente;
 
 import java.util.Scanner;
 
@@ -12,13 +17,36 @@ public class MenuPrincipal {
     private Scanner scanner;
     private MenuLogin login;
     private CadastroUsuario cadastrarUsuario;
-    private List<Usuario> usuarios;
+    private RepositorioUsuario repositorioUsuario;
+    private RepositorioCliente repositorioCliente;
+    private RepositorioProduto repositorioProduto;
+    private RepositorioPedido repositorioPedido;
+    private ServicoDesconto servicoDesconto;
+    private ServicoPedido servicoPedido;
+    private ServicoUsuario servicoUsuario;
+    private ServicoCliente servicoCliente;
 
-    public MenuPrincipal(Scanner scanner, List<Usuario> usuarios) {
+    public MenuPrincipal(Scanner scanner,
+                         RepositorioUsuario repositorioUsuario,
+                         RepositorioCliente repositorioCliente,
+                         RepositorioProduto repositorioProduto,
+                         RepositorioPedido repositorioPedido,
+                         ServicoDesconto servicoDesconto,
+                         ServicoPedido servicoPedido,
+                         ServicoUsuario servicoUsuario,
+                         ServicoCliente servicoCliente) {
         this.scanner = scanner;
-        this.usuarios = usuarios;
-        this.login = new MenuLogin(scanner, usuarios);
-        this.cadastrarUsuario = new CadastroUsuario(scanner, usuarios);
+        this.repositorioUsuario = repositorioUsuario;
+        this.repositorioCliente = repositorioCliente;
+        this.repositorioProduto = repositorioProduto;
+        this.repositorioPedido = repositorioPedido;
+        this.servicoDesconto = servicoDesconto;
+        this.servicoPedido = servicoPedido;
+        this.servicoUsuario = servicoUsuario;
+        this.servicoCliente = servicoCliente;
+        this.login = new MenuLogin(scanner, repositorioUsuario, repositorioCliente, repositorioProduto,
+                repositorioPedido, servicoDesconto, servicoPedido);
+        this.cadastrarUsuario = new CadastroUsuario(scanner, servicoUsuario, servicoCliente);
     }
 
     public void exibirMenu() {

@@ -1,6 +1,5 @@
 package aplicacao.menu.menucliente;
 
-import dominio.Notificacao.ServicoNotificador;
 import dominio.Pedido.Pedido;
 import dominio.Pedido.PedidoPadrao;
 import dominio.Pedido.ServicoPedido;
@@ -21,7 +20,7 @@ public class MenuCliente {
 
     public MenuCliente(Scanner scanner, Usuario usuarioLogado, RepositorioPedido repositorioPedido,
                        RepositorioProduto repositorioProduto, ServicoDesconto servicoDesconto,
-                       ServicoNotificador servicoNotificador, ServicoPedido servicoPedido) {
+                       ServicoPedido servicoPedido) {
         this.scanner = scanner;
         this.usuarioLogado = usuarioLogado;
         if (usuarioLogado.getCliente() == null) {
@@ -36,7 +35,7 @@ public class MenuCliente {
             System.out.println("Novo pedido criado para o cliente.");
         }
         this.menuProduto = new MenuProduto(scanner, repositorioProduto, pedido);
-        this.menuPedido = new MenuPedido(scanner, pedido, servicoDesconto, servicoNotificador, servicoPedido);
+        this.menuPedido = new MenuPedido(scanner, pedido, servicoDesconto, servicoPedido);
         this.menuPagamento = new MenuPagamento(scanner, pedido, servicoPedido, servicoDesconto);
     }
 
