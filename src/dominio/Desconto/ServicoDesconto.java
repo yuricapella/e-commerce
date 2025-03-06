@@ -41,4 +41,8 @@ public class ServicoDesconto {
         }
         return totalDesconto;
     }
+
+    public List<DescontoProduto> getDescontosProduto() {
+        return descontosProduto;
+    }
 }
