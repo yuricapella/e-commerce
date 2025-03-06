@@ -60,6 +60,6 @@ public abstract class Usuario {
     }
     @Override
     public String toString() {
-        return String.format("Usuário [ID: %d, Login: %s, Tipo: %s, Ativo: %b]", getId(), getLogin(), getTipo(), isAtivo());
+        return String.format("Usuário [ID: %d, Login: %s, Senha: %s, Tipo: %s, Ativo: %b]", getId(), getLogin(), getSenha(), getTipo(), isAtivo());
     }
 }
