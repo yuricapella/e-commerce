@@ -1,6 +1,7 @@
 package aplicacao.menu.menucliente;
 
 import aplicacao.menu.util.CalculadoraDeValoresPedido;
+import dominio.Desconto.Produto.DescontoProduto;
 import dominio.Desconto.ServicoDesconto;
 import dominio.Frete.FreteFactory;
 import dominio.Frete.ServicoFrete;
@@ -30,38 +31,40 @@ public class MenuPedido {
     public void exibirMenu() {
         boolean menuAtivo = true;
         while (menuAtivo) {
-            // Cálculos do desconto e valor final
-            double descontoPedido = CalculadoraDeValoresPedido.calcularDescontoPedido(pedido, servicoDesconto);
-            double descontoProduto = CalculadoraDeValoresPedido.calcularDescontoProduto(pedido, servicoDesconto);
-            double totalDesconto = descontoPedido + descontoProduto;
-            double valorTotalComDesconto = CalculadoraDeValoresPedido.calcularValorTotalComDesconto(pedido, servicoDesconto);
-
-            double valorFrete = CalculadoraDeValoresPedido.calcularValorFrete(pedido, servicoFrete);
-            double valorTotalFinal = CalculadoraDeValoresPedido.calcularValorTotalFinal(pedido, servicoDesconto, servicoFrete);
-
             System.out.println("\n==== Carrinho de Compras ====");
 
             System.out.printf("Pedido: %d, %s, Status: %s\n",
                     pedido.getId(), pedido.getCliente().getNome(), pedido.getStatus());
-
             System.out.printf("Data Criação: %s\n",
                     pedido.getDataCriacao().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")));
-
-            System.out.println("Valor Total: R$ " + valorTotalComDesconto);
-            System.out.println("Desconto do Pedido: R$ " + descontoPedido);
-            System.out.println("Desconto de Produto: R$ " + descontoProduto);
-            System.out.println("Valor Total de Desconto: R$ " + totalDesconto);
-            System.out.println("Valor Total com Desconto: R$ " + valorTotalComDesconto);
-            System.out.println("Valor do Frete: R$ " + valorFrete);
-            System.out.println("Valor Total Final (com frete): R$ " + valorTotalFinal);
 
             System.out.println("\nItens do Pedido:");
             for (ItemPedido item : pedido.getItens()) {
                 Produto produto = item.getProduto();
-                System.out.println("ID: " + produto.getId() + " - " + produto.getNome() + " | Quantidade: " + item.getQuantidade() + "x | Valor Unitário: R$ " + produto.getValorProduto() + " | Valor Total: R$ " + item.getValorTotal());
-            }
 
-            // Exibe as opções do menu
+                // Calcula o desconto específico para este produto
+                double descontoItem = 0;
+                for (DescontoProduto desconto : servicoDesconto.getDescontosProduto()) {
+                    descontoItem += desconto.calcular(item);
+                }
+
+                System.out.printf("ID: %d - %s | Quantidade: %d | Valor Unitário: R$ %.2f | Valor Total: R$ %.2f | Desconto Produto: R$ %.2f\n",
+                        produto.getId(), produto.getNome(), item.getQuantidade(), produto.getValorProduto(), item.getValorTotal(), descontoItem);
+            }
+            System.out.printf("Valor total pedido sem desconto: R$ %.2f\n",pedido.getValorTotal());
+
+            double descontoPedido = CalculadoraDeValoresPedido.calcularDescontoPedido(pedido, servicoDesconto);
+            double totalDesconto = descontoPedido + CalculadoraDeValoresPedido.calcularDescontoProduto(pedido, servicoDesconto);
+            double valorTotalComDesconto = CalculadoraDeValoresPedido.calcularValorTotalComDesconto(pedido, servicoDesconto);
+            double valorFrete = CalculadoraDeValoresPedido.calcularValorFrete(pedido, servicoFrete);
+            double valorTotalFinal = CalculadoraDeValoresPedido.calcularValorTotalFinal(pedido, servicoDesconto, servicoFrete);
+
+            System.out.printf("\nDesconto Pedido: R$ %.2f\n", descontoPedido);
+            System.out.printf("Valor Total de Descontos: R$ %.2f\n", totalDesconto);
+            System.out.printf("Valor Total com Desconto: R$ %.2f\n", valorTotalComDesconto);
+            System.out.printf("Valor do Frete: R$ %.2f\n", valorFrete);
+            System.out.printf("Valor Total Final (com frete): R$ %.2f\n", valorTotalFinal);
+
             System.out.println("\nEscolha uma opção:");
             System.out.println("1. Remover item");
             System.out.println("2. Alterar quantidade do item");

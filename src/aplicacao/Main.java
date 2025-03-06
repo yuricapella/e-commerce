@@ -11,6 +11,8 @@ import dominio.Pedido.ValidadorPedido;
 import dominio.Produto.*;
 import dominio.Produto.interfaces.AlteradorProduto;
 import dominio.Produto.interfaces.ValidadorProduto;
+import dominio.cliente.Cliente;
+import dominio.cliente.ClientePessoaFisica;
 import dominio.cliente.interfaces.AlteradorCliente;
 import dominio.cliente.interfaces.ValidadorCliente;
 import dominio.cliente.servico.AlteraCliente;
@@ -45,6 +47,15 @@ public class Main {
         AlteradorUsuario alteradorUsuario = new AlteraUsuario(validadorUsuario);
         FabricaUsuario fabricaUsuario = new FabricaUsuario();
         ServicoUsuario servicoUsuario = new ServicoUsuario(repositorioUsuario, alteradorUsuario, validadorUsuario, fabricaUsuario);
+
+        Usuario admin = new UsuarioAdmin("admin","1234");
+        repositorioUsuario.adicionar(admin);
+
+        Usuario testeCliente = new UsuarioCliente("teste","teste");
+        Cliente testeClientePessoaFisica = new ClientePessoaFisica("teste","12345678910","teste@teste.com");
+        testeCliente.setCliente(testeClientePessoaFisica);
+
+        repositorioUsuario.adicionar(testeCliente);
 
         // Parte Produto
         List<Produto> produtos = GeradorDeProdutos.gerarListaDeProdutos(5,5,5,5);

@@ -58,27 +58,28 @@ public class CadastroUsuario {
 
 
     private String obterLogin() {
-        System.out.print("Digite um login: ");
+        System.out.println("Digite um login (mínimo 2 caracteres, sem espaços): ");
         return scanner.nextLine();
     }
 
     private String obterSenha() {
-        System.out.print("Digite uma senha: ");
+        System.out.println("Digite uma senha (mínimo 4 caracteres, incluindo números e letras): ");
         return scanner.nextLine();
     }
 
     private String obterNomeCliente() {
-        System.out.print("Digite o nome do cliente: ");
+        System.out.print("Digite o nome do cliente (mínimo 2 caracteres): ");
         return scanner.nextLine();
     }
 
     private String obterDocumentoCliente() {
-        System.out.print("Digite o documento do cliente: ");
+        System.out.print("Digite o documento do cliente (CPF: 11 dígitos, CNPJ: 14 dígitos, apenas números): ");
+        System.out.println("Exemplo: 12345678910 ou 12345678000111");
         return scanner.nextLine();
     }
 
     private String obterEmailCliente() {
-        System.out.print("Digite o e-mail do cliente: ");
+        System.out.print("Digite o e-mail do cliente (exemplo: usuario@email.com): \n");
         return scanner.nextLine();
     }
 }

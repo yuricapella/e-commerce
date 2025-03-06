@@ -44,6 +44,7 @@ public class MenuLogin {
     }
 
     public void realizarLogin() {
+        System.out.println("Para acesso de administrador digite login: admin  senha: 1234");
         System.out.print("Digite seu login: ");
         String login = scanner.nextLine();
         System.out.print("Digite sua senha: ");
