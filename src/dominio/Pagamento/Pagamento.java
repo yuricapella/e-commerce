@@ -1,4 +1,5 @@
 package dominio.Pagamento;
 
-public class Pagamento {
+public interface Pagamento {
+    boolean realizarPagamento(double valor);
 }
