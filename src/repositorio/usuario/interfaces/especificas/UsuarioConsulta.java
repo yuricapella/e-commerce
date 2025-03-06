@@ -10,5 +10,6 @@ public interface UsuarioConsulta {
     List<Usuario> listarUsuariosAtivos();
     List<Usuario> listarTodosUsuarios();
     Usuario buscarPorLogin(String login);
+    Usuario buscarPorLoginESenha(String login, String senha);
     Usuario buscarPorId(long id);
 }

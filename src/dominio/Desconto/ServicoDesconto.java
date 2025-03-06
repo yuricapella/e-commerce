@@ -16,34 +16,29 @@ public class ServicoDesconto {
         this.descontosProduto = descontosProduto;
     }
 
-    public double calcularMelhorDesconto(Pedido pedido) {
+    public double calcularDescontoTotal(Pedido pedido) {
         double descontoPedido = calcularMelhorDescontoPedido(pedido);
         double descontoProduto = calcularMelhorDescontoProduto(pedido);
-        return Math.max(descontoPedido, descontoProduto);
+        return descontoPedido + descontoProduto;
     }
 
-    private double calcularMelhorDescontoPedido(Pedido pedido) {
-        double melhorDesconto = 0;
+    public double calcularMelhorDescontoPedido(Pedido pedido) {
+        double totalDesconto = 0;
         for (DescontoPedido desconto : descontosPedido) {
             double valorDesconto = desconto.calcular(pedido);
-            if (valorDesconto > melhorDesconto) {
-                melhorDesconto = valorDesconto;
-            }
+            totalDesconto += valorDesconto;  // Soma os descontos de pedido
         }
-        return melhorDesconto;
+        return totalDesconto;
     }
 
-    private double calcularMelhorDescontoProduto(Pedido pedido) {
-        double melhorDesconto = 0;
+    public double calcularMelhorDescontoProduto(Pedido pedido) {
+        double totalDesconto = 0;
         for (ItemPedido item : pedido.getItens()) {
             for (DescontoProduto desconto : descontosProduto) {
                 double valorDesconto = desconto.calcular(item);
-                if (valorDesconto > melhorDesconto) {
-                    melhorDesconto = valorDesconto;
-                }
+                totalDesconto += valorDesconto;  // Soma os descontos de produto
             }
         }
-        return melhorDesconto;
+        return totalDesconto;
     }
-
 }

@@ -1,7 +1,9 @@
-package aplicacao.Menu.MenuCliente;
+package aplicacao.menu.menucliente;
 
-import dominio.Notificacao.Notificador;
-import dominio.Notificacao.NotificadorEmail;
+import aplicacao.menu.util.CalculadoraDeValoresPedido;
+import dominio.Desconto.ServicoDesconto;
+import dominio.Frete.FreteFactory;
+import dominio.Frete.ServicoFrete;
 import dominio.Pedido.Pedido;
 import dominio.Pedido.ServicoPedido;
 import dominio.Produto.Produto;
@@ -11,22 +13,22 @@ import java.util.Scanner;
 public class MenuPedido {
     private Scanner scanner;
     private Pedido pedido;
+    private ServicoDesconto servicoDesconto;
+    private ServicoFrete servicoFrete;
+    private ServicoPedido servicoPedido;
 
-    public MenuPedido(Scanner scanner, Pedido pedido) {
+    public MenuPedido(Scanner scanner, Pedido pedido, ServicoDesconto servicoDesconto, ServicoPedido servicoPedido) {
         this.scanner = scanner;
         this.pedido = pedido;
+        this.servicoDesconto = servicoDesconto;
+        this.servicoFrete = new ServicoFrete(FreteFactory.criarFretes());
+        this.servicoPedido = servicoPedido;
     }
 
     public void exibirMenu() {
         boolean menuAtivo = true;
         while (menuAtivo) {
-            System.out.println("\n==== Carrinho de Compras ====");
-            System.out.println(pedido);
-            System.out.println("1. Remover item");
-            System.out.println("2. Alterar quantidade do item");
-            System.out.println("3. Finalizar pedido");
-            System.out.println("4. Voltar");
-            System.out.print("Escolha uma opção: ");
+            exibirInformacoesPedido();
 
             String opcao = scanner.nextLine();
             switch (opcao) {
@@ -47,6 +49,25 @@ public class MenuPedido {
                     break;
             }
         }
+    }
+
+    private void exibirInformacoesPedido() {
+        double descontoPedido = CalculadoraDeValoresPedido.calcularDescontoPedido(pedido, servicoDesconto);
+        double descontoProduto = CalculadoraDeValoresPedido.calcularDescontoProduto(pedido, servicoDesconto);
+        double totalDesconto = descontoPedido + descontoProduto;
+        double valorTotalComDesconto = CalculadoraDeValoresPedido.calcularValorTotalComDesconto(pedido, servicoDesconto);
+
+        double valorFrete = CalculadoraDeValoresPedido.calcularValorFrete(pedido, servicoFrete);
+        double valorTotalFinal = CalculadoraDeValoresPedido.calcularValorTotalFinal(pedido, servicoDesconto, servicoFrete);
+
+        System.out.println("\n==== Carrinho de Compras ====");
+        System.out.println(pedido);
+        System.out.println("Desconto do Pedido: R$ " + descontoPedido);
+        System.out.println("Desconto de Produto: R$ " + descontoProduto);
+        System.out.println("Valor Total de Desconto: R$ " + totalDesconto);
+        System.out.println("Valor Total com Desconto: R$ " + valorTotalComDesconto);
+        System.out.println("Valor do Frete: R$ " + valorFrete);
+        System.out.println("Valor Total Final (com frete): R$ " + valorTotalFinal);
     }
 
     private void removerItem() {
@@ -89,11 +110,8 @@ public class MenuPedido {
     }
 
     private void finalizarPedido() {
-        ServicoPedido servicoPedido = new ServicoPedido();
-        Notificador notificador = new NotificadorEmail();
         try {
             servicoPedido.concluirPedido(pedido);
-            notificador.notificar(pedido.getCliente(), pedido.getStatus());
         } catch (IllegalStateException e) {
             System.out.println("Erro ao finalizar pedido: " + e.getMessage());
         }

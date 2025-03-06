@@ -1,13 +1,13 @@
-package aplicacao.Menu.MenuAdmin;
+package aplicacao.menu.menuadmin;
 
 import dominio.cliente.Cliente;
 import dominio.Pedido.Pedido;
 import dominio.Produto.Produto;
 import dominio.usuario.Usuario;
-import repositorio.cliente.RepositorioClienteMemoria;
-import repositorio.pedido.RepositorioPedidoMemoria;
-import repositorio.produto.RepositorioProdutoMemoria;
-import repositorio.usuario.RepositorioUsuarioMemoria;
+import repositorio.cliente.interfaces.compostas.RepositorioCliente;
+import repositorio.pedido.interfaces.compostas.RepositorioPedido;
+import repositorio.produto.interfaces.compostas.RepositorioProduto;
+import repositorio.usuario.interfaces.compostas.RepositorioUsuario;
 
 import java.util.List;
 import java.util.Scanner;
@@ -15,16 +15,16 @@ import java.util.Scanner;
 public class MenuAdmin {
     private Scanner scanner;
     private Usuario usuarioLogado;
-    private RepositorioClienteMemoria repositorioCliente;
-    private RepositorioProdutoMemoria repositorioProduto;
-    private RepositorioPedidoMemoria repositorioPedido;
-    private RepositorioUsuarioMemoria repositorioUsuario;
+    private RepositorioCliente repositorioCliente;
+    private RepositorioProduto repositorioProduto;
+    private RepositorioPedido repositorioPedido;
+    private RepositorioUsuario repositorioUsuario;
 
     public MenuAdmin(Scanner scanner, Usuario usuarioLogado,
-                     RepositorioClienteMemoria repositorioCliente,
-                     RepositorioProdutoMemoria repositorioProduto,
-                     RepositorioPedidoMemoria repositorioPedido,
-                     RepositorioUsuarioMemoria repositorioUsuario) {
+                     RepositorioCliente repositorioCliente,
+                     RepositorioProduto repositorioProduto,
+                     RepositorioPedido repositorioPedido,
+                     RepositorioUsuario repositorioUsuario) {
         this.scanner = scanner;
         this.usuarioLogado = usuarioLogado;
         this.repositorioCliente = repositorioCliente;
@@ -32,7 +32,6 @@ public class MenuAdmin {
         this.repositorioPedido = repositorioPedido;
         this.repositorioUsuario = repositorioUsuario;
     }
-
     public void exibirMenu() {
         boolean adminMenuAtivo = true;
         while (adminMenuAtivo) {
