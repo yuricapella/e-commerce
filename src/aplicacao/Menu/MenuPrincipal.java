@@ -2,6 +2,8 @@ package aplicacao.Menu;
 
 import aplicacao.Menu.MenuCadastro.CadastroUsuario;
 import aplicacao.Menu.MenuLogin.MenuLogin;
+import dominio.usuario.Usuario;
+
 import java.util.List;
 
 import java.util.Scanner;
