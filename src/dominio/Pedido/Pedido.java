@@ -10,12 +10,11 @@ import java.util.List;
 
 public abstract class Pedido implements PedidoModificacao{
     private static long contador = 1;
-
-    protected final long id;
-    protected Cliente cliente;
-    protected List<ItemPedido> itens;
-    protected LocalDateTime dataCriacao;
-    protected PedidoStatus status;
+    private final long id;
+    private Cliente cliente;
+    private List<ItemPedido> itens;
+    private LocalDateTime dataCriacao;
+    private PedidoStatus status;
 
     public Pedido(Cliente cliente) {
         this.id = contador++;
@@ -24,8 +23,6 @@ public abstract class Pedido implements PedidoModificacao{
         this.dataCriacao = LocalDateTime.now();
         this.status = PedidoStatus.ABERTO;
     }
-
-    public abstract void validarPedido();
 
     public abstract void adicionarItem(Produto produto, int quantidade, double valorVenda);
 

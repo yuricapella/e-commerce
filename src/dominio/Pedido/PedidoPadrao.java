@@ -4,50 +4,67 @@ import dominio.cliente.Cliente;
 import dominio.Produto.Produto;
 
 public class PedidoPadrao extends Pedido {
-    public PedidoPadrao(Cliente cliente) {
+    private final ValidadorPedido validadorPedido;
+
+    public PedidoPadrao(Cliente cliente, ValidadorPedido validadorPedido) {
         super(cliente);
+        this.validadorPedido = validadorPedido;
     }
 
     public void adicionarItem(Produto produto, int quantidade, double valorVenda) {
-        if (this.status == PedidoStatus.ABERTO) {
-            ItemPedido item = new ItemPedido(produto, quantidade, valorVenda);
-            this.itens.add(item);
-            getValorTotal();
-        }else{
-            System.out.println("Pedido já foi finalizado");
+        if (this.getStatus() != PedidoStatus.ABERTO) {
+            System.out.println("Pedido já foi finalizado.");
+            return;
         }
+
+        try {
+            validadorPedido.validarAdicaoItem(this, produto);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return;
+        }
+
+        ItemPedido item = new ItemPedido(produto, quantidade, valorVenda);
+        this.getItens().add(item);
+        getValorTotal();
     }
 
     public void removerItem(Produto produto) {
-        if (this.status == PedidoStatus.ABERTO) {
-            this.itens.removeIf(item -> item.getProduto().equals(produto));
-            getValorTotal();
-        }else{
-            System.out.println("Pedido já foi finalizado");
+        if (this.getStatus() != PedidoStatus.ABERTO) {
+            System.out.println("Pedido já foi finalizado.");
+            return;
         }
+
+        try {
+            validadorPedido.validarRemocaoItem(this, produto);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return;
+        }
+
+        this.getItens().removeIf(item -> item.getProduto().equals(produto));
+        getValorTotal();
     }
 
     public void alterarQuantidadeItem(Produto produto, int novaQuantidade) {
-        if (this.status == PedidoStatus.ABERTO) {
-            for (ItemPedido item : itens) {
-                if (item.getProduto().equals(produto)) {
-                    item.setQuantidade(novaQuantidade);
-                    getValorTotal();
-                    break;
-                }
-            }
-        }else{
-            System.out.println("Pedido já foi finalizado");
+        if (this.getStatus() != PedidoStatus.ABERTO) {
+            System.out.println("Pedido já foi finalizado.");
+            return;
         }
-    }
 
-    @Override
-    public void validarPedido() {
-        if (itens.isEmpty()) {
-            throw new IllegalStateException("Pedido não pode estar vazio");
+        try {
+            validadorPedido.validarAlteracaoQuantidade(this, produto);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return;
         }
-        if (getValorTotal() <= 0) {
-            throw new IllegalStateException("Valor total do pedido inválido");
+
+        for (ItemPedido item : this.getItens()) {
+            if (item.getProduto().equals(produto)) {
+                item.setQuantidade(novaQuantidade);
+                getValorTotal();
+                return;
+            }
         }
     }
 }
