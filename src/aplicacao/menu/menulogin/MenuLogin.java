@@ -2,6 +2,7 @@ package aplicacao.menu.menulogin;
 
 import aplicacao.menu.menuadmin.MenuAdmin;
 import aplicacao.menu.menucliente.MenuCliente;
+import dominio.Pedido.ValidadorPedido;
 import dominio.usuario.TipoUsuario;
 import dominio.usuario.Usuario;
 import repositorio.cliente.interfaces.compostas.RepositorioCliente;
@@ -22,6 +23,7 @@ public class MenuLogin {
     private RepositorioPedido repositorioPedido;
     private ServicoDesconto servicoDesconto;
     private ServicoPedido servicoPedido;
+    private ValidadorPedido validadorPedido;
 
     public MenuLogin(Scanner scanner,
                      RepositorioUsuario repositorioUsuario,
@@ -29,7 +31,8 @@ public class MenuLogin {
                      RepositorioProduto repositorioProduto,
                      RepositorioPedido repositorioPedido,
                      ServicoDesconto servicoDesconto,
-                     ServicoPedido servicoPedido) {
+                     ServicoPedido servicoPedido,
+                     ValidadorPedido validadorPedido) {
         this.scanner = scanner;
         this.repositorioUsuario = repositorioUsuario;
         this.repositorioCliente = repositorioCliente;
@@ -37,6 +40,7 @@ public class MenuLogin {
         this.repositorioPedido = repositorioPedido;
         this.servicoDesconto = servicoDesconto;
         this.servicoPedido = servicoPedido;
+        this.validadorPedido = validadorPedido;
     }
 
     public void realizarLogin() {
@@ -67,7 +71,7 @@ public class MenuLogin {
     private void exibirMenuCliente(Usuario usuarioLogado) {
         System.out.println("Bem-vindo, " + usuarioLogado.getLogin() + "! Acesso concedido como cliente.");
         MenuCliente menuCliente = new MenuCliente(scanner, usuarioLogado, repositorioPedido, repositorioProduto,
-                servicoDesconto, servicoPedido);
+                servicoDesconto, servicoPedido, validadorPedido);
         menuCliente.exibirMenu();
     }
 }

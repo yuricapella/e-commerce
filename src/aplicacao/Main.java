@@ -6,6 +6,8 @@ import dominio.Desconto.Factory.DescontoProdutoFactory;
 import dominio.Notificacao.Notificador;
 import dominio.Notificacao.NotificadorEmail;
 import dominio.Notificacao.ServicoNotificador;
+import dominio.Pedido.ValidaPedido;
+import dominio.Pedido.ValidadorPedido;
 import dominio.Produto.*;
 import dominio.Produto.interfaces.AlteradorProduto;
 import dominio.Produto.interfaces.ValidadorProduto;
@@ -58,6 +60,7 @@ public class Main {
         ServicoNotificador servicoNotificador = new ServicoNotificador(notificador);
 
         // Parte Pedido
+        ValidadorPedido validadorPedido = new ValidaPedido();
         RepositorioPedido repositorioPedido = new RepositorioPedidoMemoria();
         ServicoPedido servicoPedido = new ServicoPedido(servicoNotificador);
 
@@ -77,7 +80,8 @@ public class Main {
                 servicoDesconto,
                 servicoPedido,
                 servicoUsuario,
-                servicoCliente
+                servicoCliente,
+                validadorPedido
         );
 
         // Exibindo o menu

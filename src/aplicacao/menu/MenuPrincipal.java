@@ -2,6 +2,7 @@ package aplicacao.menu;
 
 import aplicacao.menu.menucadastro.CadastroUsuario;
 import aplicacao.menu.menulogin.MenuLogin;
+import dominio.Pedido.ValidadorPedido;
 import repositorio.usuario.interfaces.compostas.RepositorioUsuario;
 import repositorio.cliente.interfaces.compostas.RepositorioCliente;
 import repositorio.produto.interfaces.compostas.RepositorioProduto;
@@ -25,6 +26,7 @@ public class MenuPrincipal {
     private ServicoPedido servicoPedido;
     private ServicoUsuario servicoUsuario;
     private ServicoCliente servicoCliente;
+    private ValidadorPedido validadorPedido;
 
     public MenuPrincipal(Scanner scanner,
                          RepositorioUsuario repositorioUsuario,
@@ -34,7 +36,8 @@ public class MenuPrincipal {
                          ServicoDesconto servicoDesconto,
                          ServicoPedido servicoPedido,
                          ServicoUsuario servicoUsuario,
-                         ServicoCliente servicoCliente) {
+                         ServicoCliente servicoCliente,
+                         ValidadorPedido validadorPedido) {
         this.scanner = scanner;
         this.repositorioUsuario = repositorioUsuario;
         this.repositorioCliente = repositorioCliente;
@@ -44,8 +47,9 @@ public class MenuPrincipal {
         this.servicoPedido = servicoPedido;
         this.servicoUsuario = servicoUsuario;
         this.servicoCliente = servicoCliente;
+        this.validadorPedido = validadorPedido;
         this.login = new MenuLogin(scanner, repositorioUsuario, repositorioCliente, repositorioProduto,
-                repositorioPedido, servicoDesconto, servicoPedido);
+                repositorioPedido, servicoDesconto, servicoPedido, validadorPedido);
         this.cadastrarUsuario = new CadastroUsuario(scanner, servicoUsuario, servicoCliente);
     }
 

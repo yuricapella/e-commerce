@@ -3,6 +3,7 @@ package aplicacao.menu.menucliente;
 import dominio.Pedido.Pedido;
 import dominio.Pedido.PedidoPadrao;
 import dominio.Pedido.ServicoPedido;
+import dominio.Pedido.ValidadorPedido;
 import dominio.cliente.Cliente;
 import dominio.usuario.Usuario;
 import repositorio.pedido.interfaces.compostas.RepositorioPedido;
@@ -17,10 +18,12 @@ public class MenuCliente {
     private MenuPedido menuPedido;
     private MenuPagamento menuPagamento;
     private Pedido pedido;
+    private ValidadorPedido validadorPedido;
 
     public MenuCliente(Scanner scanner, Usuario usuarioLogado, RepositorioPedido repositorioPedido,
                        RepositorioProduto repositorioProduto, ServicoDesconto servicoDesconto,
-                       ServicoPedido servicoPedido) {
+                       ServicoPedido servicoPedido,
+                       ValidadorPedido validadorPedido) {
         this.scanner = scanner;
         this.usuarioLogado = usuarioLogado;
         if (usuarioLogado.getCliente() == null) {
@@ -30,7 +33,7 @@ public class MenuCliente {
         Cliente cliente = usuarioLogado.getCliente();
         pedido = repositorioPedido.buscarPorCliente(cliente);
         if (pedido == null) {
-            pedido = new PedidoPadrao(cliente);
+            pedido = new PedidoPadrao(cliente,validadorPedido);
             repositorioPedido.adicionar(pedido);
             System.out.println("Novo pedido criado para o cliente.");
         }
