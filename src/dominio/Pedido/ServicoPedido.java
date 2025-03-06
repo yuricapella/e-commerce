@@ -29,7 +29,6 @@ public class ServicoPedido {
 
         if (pagamentoRealizado) {
             pedido.setStatus(PedidoStatus.PAGO);
-            System.out.println("Pagamento realizado com sucesso!");
             servicoNotificador.notificarMudancaDeStatus(pedido);
         } else {
             throw new IllegalStateException("Erro ao processar pagamento.");
@@ -41,14 +40,8 @@ public class ServicoPedido {
             throw new IllegalStateException("Pedido ainda não foi pago!");
         }
 
-        realizarEntrega(pedido);
-
         pedido.setStatus(PedidoStatus.FINALIZADO);
         System.out.println("Pedido finalizado e entregue.");
         servicoNotificador.notificarMudancaDeStatus(pedido);
-    }
-
-    private void realizarEntrega(Pedido pedido) {
-        System.out.println("Iniciando processo de entrega...");
     }
 }

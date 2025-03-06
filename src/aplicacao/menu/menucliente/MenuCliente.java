@@ -36,7 +36,6 @@ public class MenuCliente {
         if (pedido == null) {
             pedido = new PedidoPadrao(cliente,validadorPedido);
             repositorioPedido.adicionar(pedido);
-            System.out.println("Novo pedido criado para o cliente.");
         }
         this.menuProduto = new MenuProduto(scanner, repositorioProduto, pedido);
         this.menuPedido = new MenuPedido(scanner, pedido, servicoDesconto, servicoPedido);

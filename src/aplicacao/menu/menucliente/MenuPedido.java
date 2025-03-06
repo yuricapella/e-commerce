@@ -8,6 +8,8 @@ import dominio.Pedido.Pedido;
 import dominio.Pedido.ServicoPedido;
 import dominio.Produto.Produto;
 import dominio.Pedido.ItemPedido;
+
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class MenuPedido {
@@ -28,6 +30,7 @@ public class MenuPedido {
     public void exibirMenu() {
         boolean menuAtivo = true;
         while (menuAtivo) {
+            // Cálculos do desconto e valor final
             double descontoPedido = CalculadoraDeValoresPedido.calcularDescontoPedido(pedido, servicoDesconto);
             double descontoProduto = CalculadoraDeValoresPedido.calcularDescontoProduto(pedido, servicoDesconto);
             double totalDesconto = descontoPedido + descontoProduto;
@@ -37,7 +40,14 @@ public class MenuPedido {
             double valorTotalFinal = CalculadoraDeValoresPedido.calcularValorTotalFinal(pedido, servicoDesconto, servicoFrete);
 
             System.out.println("\n==== Carrinho de Compras ====");
-            System.out.println(pedido);
+
+            System.out.printf("Pedido: %d, %s, Status: %s\n",
+                    pedido.getId(), pedido.getCliente().getNome(), pedido.getStatus());
+
+            System.out.printf("Data Criação: %s\n",
+                    pedido.getDataCriacao().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")));
+
+            System.out.println("Valor Total: R$ " + valorTotalComDesconto);
             System.out.println("Desconto do Pedido: R$ " + descontoPedido);
             System.out.println("Desconto de Produto: R$ " + descontoProduto);
             System.out.println("Valor Total de Desconto: R$ " + totalDesconto);
@@ -45,6 +55,20 @@ public class MenuPedido {
             System.out.println("Valor do Frete: R$ " + valorFrete);
             System.out.println("Valor Total Final (com frete): R$ " + valorTotalFinal);
 
+            System.out.println("\nItens do Pedido:");
+            for (ItemPedido item : pedido.getItens()) {
+                Produto produto = item.getProduto();
+                System.out.println("ID: " + produto.getId() + " - " + produto.getNome() + " | Quantidade: " + item.getQuantidade() + "x | Valor Unitário: R$ " + produto.getValorProduto() + " | Valor Total: R$ " + item.getValorTotal());
+            }
+
+            // Exibe as opções do menu
+            System.out.println("\nEscolha uma opção:");
+            System.out.println("1. Remover item");
+            System.out.println("2. Alterar quantidade do item");
+            System.out.println("3. Finalizar pedido");
+            System.out.println("4. Voltar ao menu anterior");
+
+            // Espera a entrada do usuário
             String opcao = scanner.nextLine();
             switch (opcao) {
                 case "1":
@@ -66,6 +90,7 @@ public class MenuPedido {
         }
     }
 
+
     private void removerItem() {
         System.out.print("Digite o ID do produto a remover: ");
         try {
@@ -77,7 +102,6 @@ public class MenuPedido {
                 return;
             }
             pedido.removerItem(produto);
-            System.out.println("Produto removido do pedido.");
 
         } catch (NumberFormatException e) {
             System.out.println("ID inválido.");

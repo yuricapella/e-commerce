@@ -1,5 +1,6 @@
 package aplicacao.menu.menucliente;
 
+import dominio.Pedido.ItemPedido;
 import dominio.Produto.Produto;
 import dominio.Pedido.Pedido;
 import repositorio.produto.interfaces.compostas.RepositorioProduto;
@@ -32,6 +33,7 @@ public class MenuProduto {
 
         System.out.println("\nDigite o ID do produto para adicioná-lo ao pedido ou 'voltar' para retornar:");
         String input = scanner.nextLine();
+
         if (input.equalsIgnoreCase("voltar")) {
             return;
         }
@@ -43,14 +45,35 @@ public class MenuProduto {
                 System.out.println("Produto não encontrado.");
                 return;
             }
+
+            boolean produtoJaAdicionado = false;
+            for (ItemPedido item : pedido.getItens()) {
+                if (item.getProduto().equals(produto)) {
+                    produtoJaAdicionado = true;
+                    break;
+                }
+            }
+
+            if (produtoJaAdicionado) {
+                System.out.println("O produto já foi adicionado ao pedido.");
+                return;
+            }
+
             System.out.print("Informe a quantidade: ");
             int quantidade = Integer.parseInt(scanner.nextLine());
+
+            if (quantidade <= 0) {
+                System.out.println("Quantidade inválida. Deve ser maior que 0.");
+                return;
+            }
 
             double valorVenda = produto.getValorProduto();
             pedido.adicionarItem(produto, quantidade, valorVenda);
             System.out.println("Produto adicionado ao pedido.");
+
         } catch (NumberFormatException e) {
-            System.out.println("ID inválido.");
+            System.out.println("Entrada inválida. Por favor, insira um número válido.");
         }
     }
+
 }
