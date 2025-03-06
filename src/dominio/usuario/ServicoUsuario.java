@@ -19,7 +19,6 @@ public class ServicoUsuario {
 
     public void adicionarUsuario(Usuario usuario) {
         if (repositorioUsuario.buscarPorLogin(usuario.getLogin()) != null) {
-            System.out.println("Usuário já existe no repositório.");
             return;
         }
         validarCredenciais(usuario.getLogin(), usuario.getSenha());
