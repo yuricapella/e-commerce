@@ -1,4 +1,5 @@
 package dominio.usuario;
+import repositorio.usuario.interfaces.compostas.RepositorioUsuario;
 
 public class ServicoUsuario {
     private final RepositorioUsuario repositorioUsuario;
