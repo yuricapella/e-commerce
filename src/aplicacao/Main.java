@@ -6,6 +6,9 @@ import dominio.Desconto.Factory.DescontoProdutoFactory;
 import dominio.Notificacao.Notificador;
 import dominio.Notificacao.NotificadorEmail;
 import dominio.Notificacao.ServicoNotificador;
+import dominio.Produto.*;
+import dominio.Produto.interfaces.AlteradorProduto;
+import dominio.Produto.interfaces.ValidadorProduto;
 import dominio.cliente.interfaces.AlteradorCliente;
 import dominio.cliente.interfaces.ValidadorCliente;
 import dominio.cliente.servico.AlteraCliente;
@@ -23,6 +26,7 @@ import dominio.Pedido.ServicoPedido;
 import dominio.cliente.servico.ServicoCliente;
 import repositorio.usuario.interfaces.compostas.RepositorioUsuario;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -41,7 +45,13 @@ public class Main {
         ServicoUsuario servicoUsuario = new ServicoUsuario(repositorioUsuario, alteradorUsuario, validadorUsuario, fabricaUsuario);
 
         // Parte Produto
+        List<Produto> produtos = GeradorDeProdutos.gerarListaDeProdutos(5,5,5,5);
+
         RepositorioProduto repositorioProduto = new RepositorioProdutoMemoria();
+        ValidadorProduto validadorProduto = new ValidaProduto();
+        AlteradorProduto alteradorProduto = new AlteraProduto(validadorProduto);
+        ServicoProduto servicoProduto = new ServicoProduto(repositorioProduto,alteradorProduto);
+        servicoProduto.adicionarProduto(produtos);
 
         //Parte Notificador
         Notificador notificador = new NotificadorEmail();
