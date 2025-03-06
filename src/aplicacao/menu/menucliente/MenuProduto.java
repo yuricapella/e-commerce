@@ -1,4 +1,4 @@
-package aplicacao.Menu.MenuCliente;
+package aplicacao.menu.menucliente;
 
 import dominio.Produto.Produto;
 import dominio.Pedido.Pedido;
