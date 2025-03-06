@@ -1,8 +1,6 @@
 package teste.unitario;
 
 import dominio.Produto.*;
-import repositorio.produto.RepositorioProdutoAtivo;
-import repositorio.produto.interfaces.compostas.ProdutoAtivo;
 
 public class TesteProduto {
     public static void main(String[] args) {

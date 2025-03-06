@@ -1,8 +1,8 @@
 package teste.unitario;
 
-import dominio.Cliente.Cliente;
-import dominio.Cliente.ClientePessoaFisica;
-import dominio.Cliente.ClientePessoaJuridica;
+import dominio.cliente.Cliente;
+import dominio.cliente.ClientePessoaFisica;
+import dominio.cliente.ClientePessoaJuridica;
 
 public class TesteCliente {
     public static void main(String[] args) {
