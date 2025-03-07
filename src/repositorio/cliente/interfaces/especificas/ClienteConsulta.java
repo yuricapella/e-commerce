@@ -1,6 +1,6 @@
 package repositorio.cliente.interfaces.especificas;
 
-import dominio.Cliente.Cliente;
+import dominio.cliente.Cliente;
 
 import java.util.List;
 

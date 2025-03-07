@@ -1,6 +1,6 @@
 package repositorio.produto;
 
-import dominio.Produto.Produto;
+import dominio.produto.Produto;
 import repositorio.produto.interfaces.compostas.RepositorioProduto;
 
 import java.util.ArrayList;
@@ -14,6 +14,12 @@ public class RepositorioProdutoMemoria implements RepositorioProduto {
     @Override
     public void adicionar(Produto produto) {
         produtos.put(produto.getId(), produto);
+    }
+
+    public void adicionar(List<Produto> listaProdutos) {
+        for (Produto produto : listaProdutos) {
+            produtos.put(produto.getId(), produto);
+        }
     }
 
     @Override
