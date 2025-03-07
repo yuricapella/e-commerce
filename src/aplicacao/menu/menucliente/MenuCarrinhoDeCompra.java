@@ -79,8 +79,12 @@ public class MenuCarrinhoDeCompra {
                         if (produto == null) {
                             System.out.println("Produto não encontrado no pedido.");
                         } else {
-                            pedido.removerItem(produto);
-                            System.out.println("Produto removido com sucesso.");
+                            boolean produtoRemovido = pedido.removerItem(produto);
+                            if (produtoRemovido) {
+                                System.out.println("Produto removido com sucesso.");
+                            } else {
+                                System.out.println("Não foi possível remover o produto. Verifique o status do pedido.");
+                            }
                         }
                     } catch (NumberFormatException e) {
                         System.out.println("ID inválido.");

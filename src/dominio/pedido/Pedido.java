@@ -27,7 +27,7 @@ public abstract class Pedido implements PedidoModificacao {
 
     public abstract void adicionarItem(Produto produto, int quantidade, double valorVenda);
 
-    public abstract void removerItem(Produto produto);
+    public abstract boolean removerItem(Produto produto);
 
     public abstract void alterarQuantidadeItem(Produto produto, int novaQuantidade);
 

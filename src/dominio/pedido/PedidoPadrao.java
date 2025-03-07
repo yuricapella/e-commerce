@@ -30,21 +30,22 @@ public class PedidoPadrao extends Pedido {
         getValorTotal();
     }
 
-    public void removerItem(Produto produto) {
+    public boolean removerItem(Produto produto) {
         if (this.getStatus() != PedidoStatus.ABERTO) {
             System.out.println("Pedido já foi finalizado.");
-            return;
+            return false;
         }
 
         try {
             validadorPedido.validarRemocaoItem(this, produto);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return;
+            return false;
         }
 
         this.getItens().removeIf(item -> item.getProduto().equals(produto));
         getValorTotal();
+        return false;
     }
 
     public void alterarQuantidadeItem(Produto produto, int novaQuantidade) {
