@@ -102,16 +102,16 @@ A estrutura do projeto foi organizada em camadas para garantir separação de re
   - Contém as entidades, serviços e regras de negócio para clientes, produtos, pedidos, usuários, descontos, frete, notificações e pagamentos.
 
 - **infraestrutura/**  
-  - Contém as configurações e implementações de baixo nível.
+  - Apenas um esboço
 
 - **repositorio/**  
   - Contém as implementações dos repositórios (em memória) para clientes, produtos, pedidos e usuários.
 
 - **teste/**  
-  - Contém os testes unitários e de integração do sistema.
+  - Contém simulação de testes unitários e de integração do sistema.
 
 - **util/**  
-  - Contém utilitários, como `CalculadoraDeValoresPedido` e `FormatadorExibicao`.
+  - Apenas um esboço
 
 Para ver a estrutura completa do projeto, confira o arquivo [ESTRUTURA.md](ESTRUTURA.md).
 
