@@ -1,6 +1,6 @@
 package teste.unitario;
 
-import dominio.Produto.*;
+import dominio.produto.*;
 
 public class TesteProduto {
     public static void main(String[] args) {

@@ -2,14 +2,16 @@ package aplicacao.menu;
 
 import aplicacao.menu.menucadastro.CadastroUsuario;
 import aplicacao.menu.menulogin.MenuLogin;
-import dominio.Pedido.ValidadorPedido;
+import dominio.pedido.interfaces.ValidadorPedido;
+import dominio.produto.servico.ServicoProduto;
+import dominio.cliente.interfaces.ValidadorCliente;
 import repositorio.usuario.interfaces.compostas.RepositorioUsuario;
 import repositorio.cliente.interfaces.compostas.RepositorioCliente;
 import repositorio.produto.interfaces.compostas.RepositorioProduto;
 import repositorio.pedido.interfaces.compostas.RepositorioPedido;
-import dominio.Desconto.ServicoDesconto;
-import dominio.Pedido.ServicoPedido;
-import dominio.usuario.ServicoUsuario;
+import dominio.desconto.ServicoDesconto;
+import dominio.pedido.servico.ServicoPedido;
+import dominio.usuario.servico.ServicoUsuario;
 import dominio.cliente.servico.ServicoCliente;
 
 import java.util.Scanner;
@@ -26,7 +28,9 @@ public class MenuPrincipal {
     private ServicoPedido servicoPedido;
     private ServicoUsuario servicoUsuario;
     private ServicoCliente servicoCliente;
+    private ServicoProduto servicoProduto;
     private ValidadorPedido validadorPedido;
+    private ValidadorCliente validadorCliente;
 
     public MenuPrincipal(Scanner scanner,
                          RepositorioUsuario repositorioUsuario,
@@ -37,7 +41,9 @@ public class MenuPrincipal {
                          ServicoPedido servicoPedido,
                          ServicoUsuario servicoUsuario,
                          ServicoCliente servicoCliente,
-                         ValidadorPedido validadorPedido) {
+                         ServicoProduto servicoProduto,
+                         ValidadorPedido validadorPedido,
+                         ValidadorCliente validadorCliente) {
         this.scanner = scanner;
         this.repositorioUsuario = repositorioUsuario;
         this.repositorioCliente = repositorioCliente;
@@ -47,9 +53,12 @@ public class MenuPrincipal {
         this.servicoPedido = servicoPedido;
         this.servicoUsuario = servicoUsuario;
         this.servicoCliente = servicoCliente;
+        this.servicoProduto = servicoProduto;
         this.validadorPedido = validadorPedido;
-        this.login = new MenuLogin(scanner, repositorioUsuario, repositorioCliente, repositorioProduto,
-                repositorioPedido, servicoDesconto, servicoPedido, validadorPedido);
+        this.validadorCliente = validadorCliente;
+        this.login = new MenuLogin(scanner, repositorioUsuario, repositorioCliente, repositorioProduto, repositorioPedido,
+                servicoDesconto, servicoPedido, servicoProduto, servicoUsuario, servicoCliente, validadorPedido, validadorCliente);
+
         this.cadastrarUsuario = new CadastroUsuario(scanner, servicoUsuario, servicoCliente, repositorioUsuario);
     }
 

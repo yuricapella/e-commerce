@@ -1,23 +1,33 @@
 package aplicacao;
 
 import aplicacao.menu.MenuPrincipal;
-import dominio.Desconto.Factory.DescontoPedidoFactory;
-import dominio.Desconto.Factory.DescontoProdutoFactory;
-import dominio.Notificacao.Notificador;
-import dominio.Notificacao.NotificadorEmail;
-import dominio.Notificacao.ServicoNotificador;
-import dominio.Pedido.ValidaPedido;
-import dominio.Pedido.ValidadorPedido;
-import dominio.Produto.*;
-import dominio.Produto.interfaces.AlteradorProduto;
-import dominio.Produto.interfaces.ValidadorProduto;
+import dominio.desconto.Factory.DescontoPedidoFactory;
+import dominio.desconto.Factory.DescontoProdutoFactory;
+import dominio.notificacao.Notificador;
+import dominio.notificacao.NotificadorEmail;
+import dominio.notificacao.ServicoNotificador;
+import dominio.pedido.servico.ValidaPedido;
+import dominio.pedido.interfaces.ValidadorPedido;
+import dominio.produto.*;
+import dominio.produto.interfaces.AlteradorProduto;
+import dominio.produto.interfaces.ValidadorProduto;
 import dominio.cliente.Cliente;
 import dominio.cliente.ClientePessoaFisica;
 import dominio.cliente.interfaces.AlteradorCliente;
 import dominio.cliente.interfaces.ValidadorCliente;
 import dominio.cliente.servico.AlteraCliente;
 import dominio.cliente.servico.ValidaCliente;
+import dominio.produto.servico.AlteraProduto;
+import dominio.produto.servico.ServicoProduto;
+import dominio.produto.servico.ValidaProduto;
+import dominio.produto.util.GeradorDeProdutos;
 import dominio.usuario.*;
+import dominio.usuario.fabrica.FabricaUsuario;
+import dominio.usuario.interfaces.AlteradorUsuario;
+import dominio.usuario.interfaces.ValidadorUsuario;
+import dominio.usuario.servico.AlteraUsuario;
+import dominio.usuario.servico.ServicoUsuario;
+import dominio.usuario.servico.ValidaUsuario;
 import repositorio.cliente.interfaces.compostas.RepositorioCliente;
 import repositorio.pedido.interfaces.compostas.RepositorioPedido;
 import repositorio.produto.interfaces.compostas.RepositorioProduto;
@@ -25,8 +35,8 @@ import repositorio.usuario.RepositorioUsuarioMemoria;
 import repositorio.cliente.RepositorioClienteMemoria;
 import repositorio.produto.RepositorioProdutoMemoria;
 import repositorio.pedido.RepositorioPedidoMemoria;
-import dominio.Desconto.ServicoDesconto;
-import dominio.Pedido.ServicoPedido;
+import dominio.desconto.ServicoDesconto;
+import dominio.pedido.servico.ServicoPedido;
 import dominio.cliente.servico.ServicoCliente;
 import repositorio.usuario.interfaces.compostas.RepositorioUsuario;
 
@@ -93,10 +103,11 @@ public class Main {
                 servicoPedido,
                 servicoUsuario,
                 servicoCliente,
-                validadorPedido
+                servicoProduto,
+                validadorPedido,
+                validadorCliente
         );
 
-        // Exibindo o menu
         menuPrincipal.exibirMenu();
         scanner.close();
     }

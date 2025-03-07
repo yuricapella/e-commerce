@@ -1,8 +1,8 @@
 package aplicacao.menu.util;
 
-import dominio.Desconto.ServicoDesconto;
-import dominio.Frete.ServicoFrete;
-import dominio.Pedido.Pedido;
+import dominio.desconto.ServicoDesconto;
+import dominio.frete.ServicoFrete;
+import dominio.pedido.Pedido;
 
 public class CalculadoraDeValoresPedido {
 

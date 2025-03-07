@@ -2,20 +2,19 @@ package teste.integracao;
 
 import dominio.cliente.Cliente;
 import dominio.cliente.ClientePessoaFisica;
-import dominio.Desconto.Factory.DescontoPedidoFactory;
-import dominio.Desconto.Factory.DescontoProdutoFactory;
-import dominio.Desconto.ServicoDesconto;
-import dominio.Pedido.Pedido;
-import dominio.Pedido.PedidoPadrao;
-import dominio.Pedido.ValidaPedido;
-import dominio.Produto.Produto;
-import dominio.Produto.ProdutoEletronico;
-import dominio.Produto.ProdutoVestuario;
+import dominio.desconto.Factory.DescontoPedidoFactory;
+import dominio.desconto.Factory.DescontoProdutoFactory;
+import dominio.desconto.ServicoDesconto;
+import dominio.pedido.Pedido;
+import dominio.pedido.PedidoPadrao;
+import dominio.pedido.servico.ValidaPedido;
+import dominio.produto.Produto;
+import dominio.produto.ProdutoEletronico;
+import dominio.produto.ProdutoVestuario;
 import repositorio.cliente.RepositorioClienteMemoria;
 import repositorio.cliente.interfaces.compostas.RepositorioCliente;
 import repositorio.produto.RepositorioProdutoMemoria;
 import repositorio.produto.interfaces.compostas.RepositorioProduto;
-import aplicacao.menu.util.CalculadoraDeValoresPedido;
 
 public class TesteDesconto {
     public static void main(String[] args) {

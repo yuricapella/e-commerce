@@ -1,8 +1,11 @@
 package teste.integracao;
 
-import dominio.Produto.*;
-import dominio.Produto.interfaces.AlteradorProduto;
-import dominio.Produto.interfaces.ValidadorProduto;
+import dominio.produto.*;
+import dominio.produto.interfaces.AlteradorProduto;
+import dominio.produto.interfaces.ValidadorProduto;
+import dominio.produto.servico.AlteraProduto;
+import dominio.produto.servico.ServicoProduto;
+import dominio.produto.servico.ValidaProduto;
 import repositorio.produto.RepositorioProdutoMemoria;
 import repositorio.produto.interfaces.compostas.RepositorioProduto;
 

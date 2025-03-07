@@ -1,16 +1,16 @@
 package teste.integracao;
 
-import dominio.Pedido.ValidaPedido;
-import dominio.Pedido.ValidadorPedido;
+import dominio.pedido.servico.ValidaPedido;
+import dominio.pedido.interfaces.ValidadorPedido;
 import dominio.cliente.Cliente;
 import dominio.cliente.ClientePessoaFisica;
-import dominio.Produto.Produto;
-import dominio.Produto.ProdutoEletronico;
-import dominio.Produto.ProdutoVestuario;
-import dominio.Pedido.Pedido;
-import dominio.Pedido.PedidoPadrao;
-import dominio.Frete.ServicoFrete;
-import dominio.Frete.FreteFactory;
+import dominio.produto.Produto;
+import dominio.produto.ProdutoEletronico;
+import dominio.produto.ProdutoVestuario;
+import dominio.pedido.Pedido;
+import dominio.pedido.PedidoPadrao;
+import dominio.frete.ServicoFrete;
+import dominio.frete.FreteFactory;
 import repositorio.cliente.RepositorioClienteMemoria;
 import repositorio.cliente.interfaces.compostas.RepositorioCliente;
 import repositorio.produto.RepositorioProdutoMemoria;

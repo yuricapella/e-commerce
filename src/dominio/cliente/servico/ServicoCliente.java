@@ -2,8 +2,8 @@ package dominio.cliente.servico;
 
 import dominio.cliente.Cliente;
 import dominio.cliente.TipoCliente;
-import dominio.cliente.criarclientes.FabricaCliente;
-import dominio.cliente.criarclientes.FabricaClienteFactory;
+import dominio.cliente.interfaces.FabricaCliente;
+import dominio.cliente.fabrica.FabricaClienteFactory;
 import dominio.cliente.interfaces.AlteradorCliente;
 import dominio.cliente.interfaces.ValidadorCliente;
 import dominio.cliente.util.SelecionaTipoCliente;

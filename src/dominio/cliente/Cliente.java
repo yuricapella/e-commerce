@@ -34,6 +34,10 @@ public abstract class Cliente {
         return id;
     }
 
+    public TipoCliente getTipo() {
+        return tipo;
+    }
+
     public boolean isAtivo() {
         return ativo;
     }
@@ -56,8 +60,8 @@ public abstract class Cliente {
 
     @Override
     public String toString() {
-        return String.format("Cliente [ID: %d, Nome: %s, Documento: %s, Email: %s]",
-                id, nome, documento, email);
+        return String.format("Cliente [ID: %d, Nome: %s, Documento: %s, Email: %s, Ativo: %b]",
+                id, nome, documento, email, ativo);
     }
 
 }

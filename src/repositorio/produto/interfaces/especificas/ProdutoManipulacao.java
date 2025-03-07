@@ -1,6 +1,6 @@
 package repositorio.produto.interfaces.especificas;
 
-import dominio.Produto.Produto;
+import dominio.produto.Produto;
 
 public interface ProdutoManipulacao {
     void adicionar(Produto produto);

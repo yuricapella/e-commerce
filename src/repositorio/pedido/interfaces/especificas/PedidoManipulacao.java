@@ -1,6 +1,6 @@
 package repositorio.pedido.interfaces.especificas;
 
-import dominio.Pedido.Pedido;
+import dominio.pedido.Pedido;
 
 public interface PedidoManipulacao {
     void adicionar(Pedido pedido);

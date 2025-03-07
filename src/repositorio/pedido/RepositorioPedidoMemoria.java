@@ -1,7 +1,7 @@
 package repositorio.pedido;
 
-import dominio.Pedido.Pedido;
-import dominio.Pedido.PedidoStatus;
+import dominio.pedido.Pedido;
+import dominio.pedido.PedidoStatus;
 import dominio.cliente.Cliente;
 import repositorio.pedido.interfaces.compostas.RepositorioPedido;
 

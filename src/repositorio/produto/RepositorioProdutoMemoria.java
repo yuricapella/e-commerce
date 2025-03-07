@@ -1,6 +1,6 @@
 package repositorio.produto;
 
-import dominio.Produto.Produto;
+import dominio.produto.Produto;
 import repositorio.produto.interfaces.compostas.RepositorioProduto;
 
 import java.util.ArrayList;

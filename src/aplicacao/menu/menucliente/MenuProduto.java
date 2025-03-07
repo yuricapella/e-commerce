@@ -1,8 +1,8 @@
 package aplicacao.menu.menucliente;
 
-import dominio.Pedido.ItemPedido;
-import dominio.Produto.Produto;
-import dominio.Pedido.Pedido;
+import aplicacao.menu.util.FormatadorExibicao;
+import dominio.produto.Produto;
+import dominio.pedido.Pedido;
 import repositorio.produto.interfaces.compostas.RepositorioProduto;
 import java.util.List;
 import java.util.Scanner;
@@ -26,11 +26,9 @@ public class MenuProduto {
                 System.out.println("Nenhum produto disponível.");
                 return;
             }
+            FormatadorExibicao.exibirProdutos(produtos);
 
-            System.out.println("Lista de Produtos:");
-            for (Produto produto : produtos) {
-                System.out.println(produto);
-            }
+            System.out.println("==============================================");
 
             System.out.println("\nDigite o ID do produto para adicioná-lo ao pedido ou 'voltar' para retornar:");
             String input = scanner.nextLine();

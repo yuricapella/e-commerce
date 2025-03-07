@@ -1,6 +1,6 @@
 package aplicacao.menu.menucadastro;
 
-import dominio.usuario.ServicoUsuario;
+import dominio.usuario.servico.ServicoUsuario;
 import dominio.usuario.Usuario;
 import dominio.cliente.servico.ServicoCliente;
 import dominio.cliente.Cliente;

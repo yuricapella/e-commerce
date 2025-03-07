@@ -2,17 +2,20 @@ package aplicacao.menu.menulogin;
 
 import aplicacao.menu.menuadmin.MenuAdmin;
 import aplicacao.menu.menucliente.MenuCliente;
-import dominio.Pedido.ValidadorPedido;
+import dominio.pedido.interfaces.ValidadorPedido;
+import dominio.produto.servico.ServicoProduto;
+import dominio.cliente.interfaces.ValidadorCliente;
+import dominio.cliente.servico.ServicoCliente;
+import dominio.usuario.servico.ServicoUsuario;
 import dominio.usuario.TipoUsuario;
 import dominio.usuario.Usuario;
 import repositorio.cliente.interfaces.compostas.RepositorioCliente;
 import repositorio.produto.interfaces.compostas.RepositorioProduto;
 import repositorio.pedido.interfaces.compostas.RepositorioPedido;
-import dominio.Desconto.ServicoDesconto;
-import dominio.Pedido.ServicoPedido;
+import dominio.desconto.ServicoDesconto;
+import dominio.pedido.servico.ServicoPedido;
 import repositorio.usuario.interfaces.compostas.RepositorioUsuario;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class MenuLogin {
@@ -23,7 +26,11 @@ public class MenuLogin {
     private RepositorioPedido repositorioPedido;
     private ServicoDesconto servicoDesconto;
     private ServicoPedido servicoPedido;
+    private ServicoProduto servicoProduto;
+    private ServicoUsuario servicoUsuario;
+    private ServicoCliente servicoCliente;
     private ValidadorPedido validadorPedido;
+    private ValidadorCliente validadorCliente;
 
     public MenuLogin(Scanner scanner,
                      RepositorioUsuario repositorioUsuario,
@@ -32,7 +39,11 @@ public class MenuLogin {
                      RepositorioPedido repositorioPedido,
                      ServicoDesconto servicoDesconto,
                      ServicoPedido servicoPedido,
-                     ValidadorPedido validadorPedido) {
+                     ServicoProduto servicoProduto,
+                     ServicoUsuario servicoUsuario,
+                     ServicoCliente servicoCliente,
+                     ValidadorPedido validadorPedido,
+                     ValidadorCliente validadorCliente) {
         this.scanner = scanner;
         this.repositorioUsuario = repositorioUsuario;
         this.repositorioCliente = repositorioCliente;
@@ -40,7 +51,11 @@ public class MenuLogin {
         this.repositorioPedido = repositorioPedido;
         this.servicoDesconto = servicoDesconto;
         this.servicoPedido = servicoPedido;
+        this.servicoProduto = servicoProduto;
+        this.servicoUsuario = servicoUsuario;
+        this.servicoCliente = servicoCliente;
         this.validadorPedido = validadorPedido;
+        this.validadorCliente = validadorCliente;
     }
 
     public void realizarLogin() {
@@ -55,24 +70,27 @@ public class MenuLogin {
         if (usuarioLogado == null) {
             System.out.println("Login ou senha incorretos!");
         } else {
-            if (usuarioLogado.getTipo() == TipoUsuario.ADMINISTRADOR) {
-                exibirMenuAdmin(usuarioLogado);
+            if (!usuarioLogado.isAtivo()) { // Verifica se o usuário está ativo
+                System.out.println("Usuário está inativo. Não é possível realizar o login.");
             } else {
-                exibirMenuCliente(usuarioLogado);
+                if (usuarioLogado.getTipo() == TipoUsuario.ADMINISTRADOR) {
+                    exibirMenuAdmin(usuarioLogado);
+                } else {
+                    exibirMenuCliente(usuarioLogado);
+                }
             }
         }
     }
 
     private void exibirMenuAdmin(Usuario usuarioLogado) {
         System.out.println("Acesso concedido como administrador.");
-        MenuAdmin menuAdmin = new MenuAdmin(scanner, usuarioLogado, repositorioCliente, repositorioProduto, repositorioPedido, repositorioUsuario);
-        menuAdmin.exibirMenu();
+        MenuAdmin menuAdmin = new MenuAdmin(scanner, usuarioLogado, repositorioCliente, repositorioProduto, repositorioPedido, repositorioUsuario, servicoCliente, servicoUsuario, servicoProduto, validadorPedido);        menuAdmin.exibirMenu();
     }
 
     private void exibirMenuCliente(Usuario usuarioLogado) {
         System.out.println("Bem-vindo, " + usuarioLogado.getLogin() + "!");
         MenuCliente menuCliente = new MenuCliente(scanner, usuarioLogado, repositorioPedido, repositorioProduto,
-                servicoDesconto, servicoPedido, validadorPedido);
+                servicoDesconto, servicoPedido, servicoCliente, validadorPedido, validadorCliente);
         menuCliente.exibirMenu();
     }
 }
