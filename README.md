@@ -39,23 +39,32 @@ Este projeto foi desenvolvido para atender a Ada Tech no desenvolvimento de um s
 - **Design Patterns** – Uso de Factory, Strategy e Repository patterns para modularidade e escalabilidade.
 
 ## Como Rodar
-1. **Pré-requisitos:**  
-   - JDK 15 ou superior instalado.
 
-2. **Clone o Repositório:**
+### Pré-requisitos:
+- **JDK 15 ou superior** instalado.
+
+### Passos:
+
+1. **Clone o Repositório:**
    ```bash
    git clone https://github.com/yuricapella/e-commerce.git
+   ```
+
+2. **Navegue até o diretório do projeto:**
+   ```bash
+   cd e-commerce
+   ```
 
 3. **Compile e Execute:**
-   - Compile o projeto utilizando sua IDE preferida ou via linha de comando:
+   - Compile o projeto utilizando sua IDE ou via linha de comando:
      ```bash
      javac -d bin src/*.java
      ```
-   - Execute o projeto a partir da classe principal `Main`:
+   - Execute a classe principal:
      ```bash
      java -cp bin Main
      ```
-
+     
 4. **Interaja com o Sistema:**
    - O programa exibirá um menu interativo, permitindo que o usuário:
      - Faça login ou cadastre-se.
@@ -82,17 +91,34 @@ Este repositório contém um sistema completo para um e-commerce, desenvolvido p
 
 ---
 
-# Estrutura do Projeto
+## Estrutura do Projeto
 
-## Visão Geral
+A estrutura do projeto foi organizada em camadas para garantir separação de responsabilidades:
 
-A estrutura do projeto foi organizada, com separação de responsabilidades em camadas como **aplicação**, **domínio**, **infraestrutura**, **repositorio**, **teste** e **util**.
+- **aplicacao/**  
+  - Contém os menus interativos (`MenuAdmin`, `MenuCadastro`, `MenuCliente`, `MenuLogin`, `MenuPrincipal`, etc.).
 
-## Acesse a Estrutura Completa
+- **dominio/**  
+  - Contém as entidades, serviços e regras de negócio para clientes, produtos, pedidos, usuários, descontos, frete, notificações e pagamentos.
 
-Para ver a estrutura detalhada do projeto, clique no link abaixo:
+- **infraestrutura/**  
+  - Contém as configurações e implementações de baixo nível.
 
-[Veja a Estrutura do Projeto](ESTRUTURA.md)
+- **repositorio/**  
+  - Contém as implementações dos repositórios (em memória) para clientes, produtos, pedidos e usuários.
 
-Este arquivo contém a divisão completa de pastas e arquivos, incluindo a descrição de cada componente e sua função no sistema.
+- **teste/**  
+  - Contém os testes unitários e de integração do sistema.
+
+- **util/**  
+  - Contém utilitários, como `CalculadoraDeValoresPedido` e `FormatadorExibicao`.
+
+Para ver a estrutura completa do projeto, confira o arquivo [ESTRUTURA.md](ESTRUTURA.md).
+
+---
+
+## Documentação Complementar
+- [ENUNCIADO.md](ENUNCIADO.md) - Enunciado completo do projeto.
+- [ATALHOS.md](ATALHOS.md) - Credenciais e atalhos de acesso pré-configurados.
+
 
