@@ -33,22 +33,6 @@ Este projeto foi desenvolvido para atender a Ada Tech no desenvolvimento de um s
   - A classe `FormatadorExibicao` é utilizada para exibir dados (pedidos, produtos, clientes e usuários) de forma padronizada e organizada, garantindo uma interface limpa e intuitiva.
   - Cálculos centralizados em `CalculadoraDeValoresPedido` para determinar descontos, frete e o valor final do pedido.
 
-## Estrutura do Projeto
-- **aplicacao.menu**  
-  - `MenuAdmin`, `MenuLogin`, `MenuPrincipal`, `MenuCadastro`  
-  - Submenus: `menuadmin` (incluindo `MenuAdminAdiciona`, `MenuAdminRemove`, `MenuAdminConsulta`), `menucadastro`, `menulogin`, `menucliente` (incluindo `MenuCliente`, `MenuProduto`, `MenuCarrinhoDeCompra`, `MenuPagamento`, `MenuAlteraCliente`)
-  
-- **aplicacao.menu.util**  
-  - `FormatadorExibicao`: Métodos estáticos para exibir pedidos, produtos, clientes e usuários.
-  - `CalculadoraDeValoresPedido`: Funções para calcular descontos, frete e valores finais.
-  
-- **Domínio e Serviços**  
-  - Classes e interfaces para Clientes, Produtos, Pedidos, Usuários e seus respectivos serviços (ex.: `ServicoCliente`, `ServicoProduto`, `ServicoPedido`, `ServicoUsuario`, `ServicoDesconto`).
-  - Validações via classes como `ValidaCliente`, `ValidaUsuario` e `ValidaPedido`.
-  
-- **Repositórios**  
-  - Implementações em memória para persistência de dados (ex.: `RepositorioClienteMemoria`, `RepositorioProdutoMemoria`, `RepositorioPedidoMemoria`, `RepositorioUsuarioMemoria`).
-
 ## Tecnologias
 - **Java** – Implementação em linguagem Java, utilizando conceitos de OOP e princípios SOLID.
 - **Scanner** – Para interação via console.
