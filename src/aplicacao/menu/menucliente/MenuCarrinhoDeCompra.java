@@ -119,12 +119,16 @@ public class MenuCarrinhoDeCompra {
 
                         if (produto == null) {
                             System.out.println("Produto não encontrado no pedido.");
-                        }else {
+                        } else {
                             System.out.print("Digite a nova quantidade: ");
                             int novaQuantidade = Integer.parseInt(scanner.nextLine());
 
-                            pedido.alterarQuantidadeItem(produto, novaQuantidade);
-                            System.out.println("Quantidade atualizada.");
+                            boolean quantidadeAlterada = pedido.alterarQuantidadeItem(produto, novaQuantidade);
+                            if (quantidadeAlterada) {
+                                System.out.println("Quantidade atualizada.");
+                            } else {
+                                System.out.println("Não foi possível alterar a quantidade. Verifique o status do pedido.");
+                            }
                         }
                     } catch (NumberFormatException e) {
                         System.out.println("ID ou quantidade inválida.");

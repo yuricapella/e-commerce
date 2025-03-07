@@ -48,25 +48,26 @@ public class PedidoPadrao extends Pedido {
         return false;
     }
 
-    public void alterarQuantidadeItem(Produto produto, int novaQuantidade) {
+    public boolean alterarQuantidadeItem(Produto produto, int novaQuantidade) {
         if (this.getStatus() != PedidoStatus.ABERTO) {
             System.out.println("Pedido já foi finalizado.");
-            return;
+            return false;
         }
 
         try {
             validadorPedido.validarAlteracaoQuantidade(this, produto);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return;
+            return false;
         }
 
         for (ItemPedido item : this.getItens()) {
             if (item.getProduto().equals(produto)) {
                 item.setQuantidade(novaQuantidade);
                 getValorTotal();
-                return;
+                return false;
             }
         }
+        return false;
     }
 }

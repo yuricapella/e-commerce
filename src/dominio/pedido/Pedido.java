@@ -29,7 +29,7 @@ public abstract class Pedido implements PedidoModificacao {
 
     public abstract boolean removerItem(Produto produto);
 
-    public abstract void alterarQuantidadeItem(Produto produto, int novaQuantidade);
+    public abstract boolean alterarQuantidadeItem(Produto produto, int novaQuantidade);
 
     public void setStatus(PedidoStatus novoStatus) {
         this.status = novoStatus;
