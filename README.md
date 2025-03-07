@@ -49,22 +49,19 @@ Este projeto foi desenvolvido para atender a Ada Tech no desenvolvimento de um s
    ```bash
    git clone https://github.com/yuricapella/e-commerce.git
    ```
+cd e-commerce\src\aplicacao
+java Main.java
 
 2. **Navegue até o diretório do projeto:**
    ```bash
-   cd e-commerce
+   cd e-commerce\src\aplicacao
    ```
 
-3. **Compile e Execute:**
+3. **Execute:**
    - Compile o projeto utilizando sua IDE ou via linha de comando:
      ```bash
-     javac -d bin src/*.java
-     ```
-   - Execute a classe principal:
-     ```bash
-     java -cp bin Main
-     ```
-     
+     java Main.java
+     ```    
 4. **Interaja com o Sistema:**
    - O programa exibirá um menu interativo, permitindo que o usuário:
      - Faça login ou cadastre-se.
