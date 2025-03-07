@@ -10,7 +10,7 @@
 - **Menu:**
   - Dentro da pasta `menu/` temos as seguintes classes e estrutura.
 
-### 2. **menu/**
+#### **Menu/**
 
 - **Menu Admin:**
   - `MenuAdmin.java`: Exibe o menu de administração, com opções para gerenciar clientes, produtos e pedidos.
@@ -37,7 +37,7 @@
 
 ### 2. **dominio/**
 
-#### **Cliente:**
+#### 2.1 **Cliente:**
 
 - **Fábrica:**
   - `FabricaClienteFactory.java`: Factory para a criação de clientes.
@@ -64,7 +64,7 @@
 - **Enum:**
   - `TipoCliente.java`: Enum que define os tipos de cliente (Pessoa Física, Pessoa Jurídica).
 
-#### **Desconto:**
+#### 2.2 **Desconto:**
 
 - **Desconto:**
   - `DescontoPedido.java`: Desconto aplicado no pedido.
@@ -78,7 +78,7 @@
   - `DescontoFixo.java`: Desconto fixo para pedidos.
   - `ServicoDesconto.java`: Serviço para calcular descontos no pedido e nos produtos.
 
-#### **Frete:**
+#### 2.3 **Frete:**
 
 - **Frete:**
   - `Frete.java`: Representa as informações de frete para o pedido.
@@ -88,7 +88,7 @@
 - **Serviço:**
   - `ServicoFrete.java`: Serviço para calcular o frete de acordo com o pedido.
 
-#### **Notificação:**
+#### 2.4 **Notificação:**
 
 - **Notificação:**
   - `Notificador.java`: Classe responsável por enviar notificações.
@@ -97,13 +97,13 @@
 - **Serviço:**
   - `ServicoNotificador.java`: Serviço para gerenciar e enviar notificações.
 
-#### **Pagamento:**
+#### 2.5 **Pagamento:**
 
 - **Pagamento:**
   - `Pagamento.java`: Classe responsável pelo processo de pagamento.
   - `PagamentoPix.java`: Representa a forma de pagamento via Pix.
 
-#### **Pedido:**
+#### 2.6 **Pedido:**
 
 - **Pedido:**
   - `Pedido.java`: Representa o pedido do cliente.
@@ -121,7 +121,7 @@
 - **Enum:**
   - `PedidoStatus.java`: Enum que define os diferentes status de um pedido (ex: "aberto", "finalizado").
 
-#### **Produto:**
+#### 2.7 **Produto:**
 
 - **Produto:**
   - `Produto.java`: Representa o produto.
@@ -146,7 +146,7 @@
 - **Gerador:**
   - `GeradorDeProdutos.java`: Classe para gerar produtos automaticamente.
 
-#### **Usuário:**
+#### 2.8 **Usuário:**
 
 - **Fábrica:**
   - `FabricaUsuario.java`: Fábrica para criação de usuários.
@@ -171,13 +171,13 @@
 ### 3. **infraestrutura/**
 
 - **Configuracoes:**
-  - `Configuracoes.java`: Classe responsável pelas configurações do sistema.
+  - `Configuracoes.java`: Classe responsável pelas configurações do banco de dados futuramente.
 
 ---
 
 ### 4. **repositorio/**
 
-#### **Cliente:**
+#### 4.1 **Cliente:**
 
 - **Interfaces:**
   - `RepositorioCliente.java`: Interface para o repositório de clientes.
@@ -194,7 +194,7 @@
 
 ---
 
-#### **Pedido:**
+#### 4.2 **Pedido:**
 
 - **Interfaces:**
   - `RepositorioPedido.java`: Interface para o repositório de pedidos.
@@ -211,7 +211,7 @@
 
 ---
 
-#### **Produto:**
+#### 4.3 **Produto:**
 
 - **Interfaces:**
   - `RepositorioProduto.java`: Interface para o repositório de produtos.
@@ -228,7 +228,7 @@
 
 ---
 
-#### **Usuário:**
+#### 4.4 **Usuário:**
 
 - **Interfaces:**
   - `RepositorioUsuario.java`: Interface para o repositório de usuários.
