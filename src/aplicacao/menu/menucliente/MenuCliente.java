@@ -95,7 +95,7 @@ public class MenuCliente {
     private void exibirRegrasDeNegocio() {
         System.out.println("\n==== Regras de Desconto e Frete ====");
         System.out.println("1. 10% de desconto em produtos de vestuário a partir de 3 unidades.");
-        System.out.println("2. Compras acima de R$200 possuem 10% de desconto e frete grátis.");
+        System.out.println("2. Compras acima de R$200 possuem R$20 de desconto e frete grátis.");
         System.out.println("=====================================");
     }
 }

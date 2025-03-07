@@ -151,7 +151,6 @@ public class MenuCarrinhoDeCompra {
                     try {
                         servicoPedido.concluirPedido(pedido);
                         System.out.println("Pedido finalizado com sucesso.");
-                        menuAtivo = false;
                     } catch (IllegalStateException e) {
                         System.out.println("Erro ao finalizar pedido: " + e.getMessage());
                     }

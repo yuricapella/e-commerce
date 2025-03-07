@@ -72,7 +72,6 @@ public class MenuPagamento {
                     try {
                         if (pedido.getStatus().equals(PedidoStatus.AGUARDANDO_PAGAMENTO)) {
                             servicoPedido.processarPagamento(pedido, valorTotalFinal);
-                            System.out.println("Pagamento processado com sucesso!");
                             System.out.println("Por favor, acompanhe a entrega do seu pedido através do rastreamento.");
                         } else {
                             System.out.println("O Status do Pedido precisa estar AGUARDANDO_PAGAMENTO.");
