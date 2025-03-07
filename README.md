@@ -58,10 +58,11 @@ java Main.java
    ```
 
 3. **Execute:**
-   - Compile o projeto utilizando sua IDE ou via linha de comando:
-     ```bash
-     java Main.java
-     ```    
+ - Compile o projeto utilizando sua IDE ou via linha de comando:
+   ```bash
+   java Main.java
+   ```
+     
 4. **Interaja com o Sistema:**
    - O programa exibirá um menu interativo, permitindo que o usuário:
      - Faça login ou cadastre-se.
